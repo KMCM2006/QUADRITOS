@@ -9,7 +9,7 @@ Feature: Ver modalidades
     
     Scenario: nombre del jugador
         Given visito la pagina modalidad
-        Then deberia ver el nombre del jugador "GoDiegoGo"
+        Then deberia ver el nombre del jugador
 
     Scenario: mensaje elige modalidad
         Given visito la pagina modalidad
