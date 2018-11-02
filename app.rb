@@ -6,4 +6,8 @@ class App < Sinatra::Base
         erb :index
     end
 
+    get '/modality' do
+        erb :modality
+    end
+
 end

@@ -3,11 +3,11 @@ Given("visito la pagina modalidad") do
 end
   
 Then("deberia ver el logo del juego") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_xpath('/html/body/nav/div[1]/img')
 end
   
-Then("deberia ver el nombre del jugador") do
-    expect(page).to have_content('GoDiegoGo')
+Then("deberia ver el nombre del jugador {string}") do |nombre|
+    expect(page).to have_content(nombre)
 end
 
 Then("deberia ver un mensaje {string}") do |mensaje| 
