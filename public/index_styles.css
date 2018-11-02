@@ -1,10 +1,7 @@
 body{
     text-align: center;
-    background-color :#ffd98e;
 }
-
-input{
-    background-color: #6bd5e1;
-    font-weight:500;
-    font-size: 20px;
+h1{
+    margin-top: 0.4em;
+    font-size: 160px;
 }
