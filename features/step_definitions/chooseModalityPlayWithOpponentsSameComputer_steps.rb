@@ -3,9 +3,10 @@ Given("estoy en la pagina modalidad") do
 end
 
 When("selecciono la opcion jugar contra Oponentes desde la misma PC") do
-    pending # Write code here that turns the phrase above into concrete actions
+    page.find("//*[@id='modalitySelector']").click
+    page.find("//*[@id='modalityPlayInSameComputer']").click    
 end
   
 Then("se hace visible la opcion para elegir la cantidad de jugadores") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_selector('#numberPlayerSelector', visible: true)    
 end
