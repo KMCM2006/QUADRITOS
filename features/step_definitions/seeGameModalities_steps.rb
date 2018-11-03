@@ -22,6 +22,6 @@ Then("deberia ver segunda opcion {string}") do |opcion|
     expect(page).to have_content(opcion)
 end
 
-Then("deberia ver tercera opcion {string}") do |opcion|
-    expect(page).to have_content(opcion)
-end
+# Then("deberia ver tercera opcion {string}") do |opcion|
+#     expect(page).to have_content(opcion)
+# end

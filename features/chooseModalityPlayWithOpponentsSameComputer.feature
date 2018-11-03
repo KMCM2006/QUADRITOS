@@ -13,8 +13,7 @@ Feature: Elegir modalidad jugar contra oponentes desde la misma PC
 
     Scenario: ver opcion elegir cantidad de jugadores
         Given estoy en la pagina modalidad
-        When selecciono la opcion jugar contra Oponentes desde la misma PC
-        Then se hace visible la opcion para elegir la cantidad de jugadores
+        Then se ve la opcion para elegir la cantidad de jugadores
 
     Scenario: ver boton de empezar la partida
         Given visito la pagina modalidad
