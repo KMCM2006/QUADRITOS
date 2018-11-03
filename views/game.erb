@@ -22,12 +22,15 @@
             <li class="nav-item">
                 <div class="nav-link disabled" href="#">GoDiegoGo</div>
             </li>
+            <li class="nav-item">
+                <div class="nav-link disabled" href="#">Configuraciones</div>
+            </li>
             </ul>
         </div>
     </nav>
     <div class="container main-game">
         <div class="row">
-            <div class="col">
+            <div class="col-sm">
                 <table>
                     <% @board.getRows.each do |row| %>
                         <tr>
@@ -40,6 +43,43 @@
                             <% end %>
                         </tr>
                     <% end %>
+                </table>
+            </div>
+            <div class="col-sm">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Puntaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @players.each do |player| %>
+                            <tr>
+                                <td scope="row"><%= player[0]%></td>
+                                <td><%= player[1]%></td>
+                                <td><%= player[2]%></td>
+                            </tr>
+                        <% end %>
+                        <!--<tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td colspan="2">Larry the Bird</td>
+                            <td>@twitter</td>
+                        </tr>-->
+                    </tbody>
                 </table>
             </div>
         </div>
