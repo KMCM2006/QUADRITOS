@@ -10,13 +10,13 @@
     <script>  
         $(document).ready(function(){
             $('#modalitySelector').on('click', function() {
-            if ( this.value == '1')
-            {
-                $("#numberPlayerSelector").show();
-            }
-            else
+            if ( this.value == 3)
             {
                 $("#numberPlayerSelector").hide();
+            }
+            else
+            {                
+                $("#numberPlayerSelector").show();
             }
             });
         });
@@ -65,10 +65,10 @@
                     <option value="4">4 jugadores</option>
                 </select>
             </div>
+            <div>
+                <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
+            </div>
         </form>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
     </div>
 </body>
 </html>
