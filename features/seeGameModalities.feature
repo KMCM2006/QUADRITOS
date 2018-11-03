@@ -23,6 +23,6 @@ Feature: Ver modalidades
         Given visito la pagina modalidad
         Then deberia ver segunda opcion "Oponentes desde distinta PC"
 
-    Scenario: jugar contra la PC
-        Given visito la pagina modalidad
-        Then deberia ver tercera opcion "Jugar contra la PC"
+    # Scenario: jugar contra la PC
+    #     Given visito la pagina modalidad
+    #     Then deberia ver tercera opcion "Jugar contra la PC"

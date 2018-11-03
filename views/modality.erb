@@ -10,7 +10,7 @@
     <script>  
         $(document).ready(function(){
             $('#modalitySelector').on('click', function() {
-            if ( this.value == 3)
+            if ( this.value == 1 || this.value == 2)
             {
                 $("#numberPlayerSelector").hide();
             }
@@ -50,7 +50,7 @@
                 <select class="form-control form-control-lg" id="modalitySelector" name="modality">
                     <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
                     <option value="2" id="modalityPlayInDifferentComputer">Oponentes desde distinta PC</option>
-                    <option value="3" id="modalityPlayWithComputer">Jugar contra la PC</option>
+                    <!--<option value="3" id="modalityPlayWithComputer">Jugar contra la PC</option> -->
                 </select>
             </div>
             <br/>
@@ -60,7 +60,7 @@
                     <h3>Elige la cantidad de jugadores</h3>
                 </div>
                 <select class="form-control form-control-lg" name="numberPlayers">
-                    <option value="2" selected="selected">2 jugadores</option>
+                    <option value="2">2 jugadores</option>
                     <option value="3">3 jugadores</option>
                     <option value="4">4 jugadores</option>
                 </select>
