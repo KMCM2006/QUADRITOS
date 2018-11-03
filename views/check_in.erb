@@ -26,16 +26,18 @@
     <center>
         <b><h1>Registrarse</h1></b>
         <div>
+        <form id="form-register" action="/modality" method="post">
             <strong><p><label >Usuario:</label></p></strong>
-            <input name="usuario" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required=""></p>
-            </br>
+            <input name="user" type="text" id="usuario" placeholder="Ingresa Usuario" autofocus="" required></p>
+            <br/>
             <strong><p><label>Contraseña:</label></p></strong>
-            <input name="contrasenia" type="password" id="contrasenia" placeholder="Ingresa Password" required=""></p>
-            </br>
+            <input name="password" type="password" id="contrasenia" placeholder="Ingresa Password" required></p>
+            <br/>
             <strong><p><label>Confirmar contraseña:</label></p></strong>
-            <input name="contrasenia" type="password" id="contrasenia" placeholder="Confirmar Password" required=""></p>
-             </br> </br>
-            <button type="button" class="btn btn-info" name="boton">Continuar</button>
+            <input name="password" type="password" id="contrasenia" placeholder="Confirmar Password" required></p>
+             <br/> <br/>
+            <input type="submit" class="btn btn-info" name="boton" value="Continuar"/>
+        </form>
         </div>
     </center>
     </body>

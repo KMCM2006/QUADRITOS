@@ -6,7 +6,7 @@ class App < Sinatra::Base
         erb :welcome
     end
 
-    get '/modality' do
+    post '/modality' do
         erb :modality
     end
 
