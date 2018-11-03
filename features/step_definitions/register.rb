@@ -1,5 +1,5 @@
 Given("visito la pagina registrarse") do
-  visit('/check_in')
+  visit('/register')
 end
 
 Then("deberia ver el logo del juego en la barra de navegacion.") do

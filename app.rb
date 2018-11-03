@@ -7,11 +7,10 @@ class App < Sinatra::Base
     end
 
     get '/modality' do
-        puts params[:user]
         erb :modality
     end
 
-    get '/check_in' do
-        erb :check_in
+    get '/register' do
+        erb :register
     end
 end
