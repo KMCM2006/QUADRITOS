@@ -6,7 +6,7 @@ Then("deberia ver el mensaje {string}") do |mensaje|
     expect(page).to have_content(mensaje)
 end
 
-Then("deberia ver el logo del juego") do
+Then("deberia ver el logo del juego en la ventana principal") do
     expect(page).to have_xpath('/html/body/img[1]')
 end
   

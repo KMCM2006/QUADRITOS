@@ -2,7 +2,7 @@ Given("visito la pagina modalidad") do
     visit('/modality')
 end
   
-Then("deberia ver el logo del juego") do
+Then("deberia ver el logo del juego en la ventana para elegir la modalidad") do
     expect(page).to have_xpath('/html/body/nav/div[1]/img')
 end
   
