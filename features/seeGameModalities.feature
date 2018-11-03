@@ -5,7 +5,7 @@ Feature: Ver modalidades
 
     Scenario: logo del juego
         Given visito la pagina modalidad
-        Then deberia ver el logo del juego
+        Then deberia ver logo del juego
     
     Scenario: nombre del jugador
         Given visito la pagina modalidad
