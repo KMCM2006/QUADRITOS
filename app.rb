@@ -10,4 +10,8 @@ class App < Sinatra::Base
         erb :modality
     end
 
+    get '/game' do
+        erb :game
+    end
+
 end
