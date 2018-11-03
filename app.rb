@@ -7,6 +7,7 @@ class App < Sinatra::Base
     end
 
     get '/modality' do
+        puts params[:user]
         erb :modality
     end
 
