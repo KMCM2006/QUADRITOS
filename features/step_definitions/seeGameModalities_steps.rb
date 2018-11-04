@@ -2,7 +2,7 @@ Given("visito la pagina modalidad") do
     visit('/modality')
 end
   
-Then("deberia ver el logo del juego") do
+Then("deberia ver logo del juego") do
     expect(page).to have_xpath('/html/body/nav/div[1]/img')
 end
   
@@ -22,6 +22,6 @@ Then("deberia ver segunda opcion {string}") do |opcion|
     expect(page).to have_content(opcion)
 end
 
-Then("deberia ver tercera opcion {string}") do |opcion|
-    expect(page).to have_content(opcion)
-end
+# Then("deberia ver tercera opcion {string}") do |opcion|
+#     expect(page).to have_content(opcion)
+# end

@@ -10,13 +10,13 @@
     <script>  
         $(document).ready(function(){
             $('#modalitySelector').on('click', function() {
-            if ( this.value == '1')
-            {
-                $("#numberPlayerSelector").show();
-            }
-            else
+            if ( this.value == 1 || this.value == 2)
             {
                 $("#numberPlayerSelector").hide();
+            }
+            else
+            {                
+                $("#numberPlayerSelector").show();
             }
             });
         });
@@ -24,7 +24,7 @@
 </head>
 <body style="background:rgb(107,213,225)">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="navbar-brand"><img src="logo.jpeg" height="42" width="42"/></div>
+        <div class="navbar-brand"><img src="logo.jpg" height="42" width="42"/></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,7 +38,7 @@
         </div>
         </nav>
     <div class="container" style="text-align:center;">
-        <form action="/modality" method="post">
+        <form action="/game" method="post">
             <div>
                 <h3 class="display-3">Modalidades</h3> 
             </div>
@@ -50,7 +50,7 @@
                 <select class="form-control form-control-lg" id="modalitySelector" name="modality">
                     <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
                     <option value="2" id="modalityPlayInDifferentComputer">Oponentes desde distinta PC</option>
-                    <option value="3" id="modalityPlayWithComputer">Jugar contra la PC</option>
+                    <!--<option value="3" id="modalityPlayWithComputer">Jugar contra la PC</option> -->
                 </select>
             </div>
             <br/>
@@ -60,10 +60,13 @@
                     <h3>Elige la cantidad de jugadores</h3>
                 </div>
                 <select class="form-control form-control-lg" name="numberPlayers">
-                    <option value="2" selected="selected">2 jugadores</option>
+                    <option value="2">2 jugadores</option>
                     <option value="3">3 jugadores</option>
                     <option value="4">4 jugadores</option>
                 </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
             </div>
         </form>
     </div>

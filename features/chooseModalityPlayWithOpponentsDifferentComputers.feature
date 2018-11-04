@@ -1,4 +1,4 @@
-Feature: Elegir modalidad jugar contra oponentes desde la misma PC
+Feature: Elegir modalidad jugar contra oponentes desde distinta PC
     Como jugador
     Quiero elegir la modalidad jugar contra oponentes desde la misma PC
     Para jugar con las personas que me rodean
