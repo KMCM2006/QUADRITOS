@@ -21,7 +21,7 @@ class App < Sinatra::Base
         numberOfPlayer = numberOfPlayer.to_i
         @players = Array[]
         for number in (1..numberOfPlayer) do
-            @players.push([number, "Jugador "+number.to_s, 0])
+            @players.push([number, Player.new("Jugador "+number.to_s, 0)])
         end
         puts numberOfPlayer
         @board = Board.new(7, 7)
