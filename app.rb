@@ -1,4 +1,5 @@
 require './lib/board'
+require './lib/player'
 require 'sinatra'
 
 class App < Sinatra::Base
