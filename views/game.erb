@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>QUADRITOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style_game.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        let totalPlayer = <%=@players.length%>;
+        let currentTurn = 1;
+        let rgbValue = '#dee2e6';
+        function selected(line) {
+            evaluateCurrentTurn();
+            $("#"+line.id).css('stroke', rgbValue);
+            $("#"+line.id).removeAttr('onclick');
+            currentTurn++;
+            evaluateCurrentTurn();
+        }
+
+        function evaluateCurrentTurn() {
+            let classRow;
+            for(let i = 1; i <= totalPlayer; i++) {
+                $("#user-"+i).removeAttr('class');
+                $("#user-"+i).attr('class', '');
+                $('#user-'+i)[0].className = '';
+            }
+            switch(currentTurn) {
+                case 1:
+                    classRow = 'bg-primary';
+                    rgbValue = '#007bff';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 2:
+                    classRow = 'bg-success';
+                    rgbValue = '#28a745';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 3:
+                    classRow = 'bg-danger';
+                    rgbValue = '#dc3545';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 4:
+                    classRow = 'bg-warning';
+                    rgbValue = '#ffc107';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                default:
+                    currentTurn = 0;
+            }
+            if(currentTurn >= totalPlayer)
+                currentTurn = 0;
+        }
+        function start () {
+            classRow = 'bg-primary';
+            $("#user-1").addClass('bg-primary');
+        }
+        window.onload=start;
+    </script>
+
+</head>
+
+<body style="background:rgb(107,213,225)">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand"><img src="logo.jpg" height="42" width="42"/></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <div class="nav-link disabled" href="#">GoDiegoGo</div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link disabled" href="#">Configuraciones</div>
+            </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container main-game">
+        <div class="row">
+            <div class="col-sm">
+                <svg height="400" width="400">
+                    <% @board.getHorizontalLines.each do |line| %>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9" />
+                    <% end %>
+                    <% @board.getVerticalLines.each do |line| %>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                    <% end %>
+                    <% @board.getPoints.each do |point| %>
+                        <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
+                    <% end %>
+                </svg>
+            </div>
+            <div class="col-sm">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Puntaje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @players.each do |player| %>
+                            <tr id="user-<%= player[0]%>">
+                                <td scope="row"><%= player[0]%></td>
+                                <td><%= player[1].getName%></td>
+                                <td><%= player[1].getScore%></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
