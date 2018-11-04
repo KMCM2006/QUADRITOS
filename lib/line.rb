@@ -2,8 +2,8 @@ class Line
 
     def initialize(posX1, posX2, posY1, posY2)
         @posX1 = posX1
-        @posY1 = posY1
         @posX2 = posX2
+        @posY1 = posY1
         @posY2 = posY2
     end
 

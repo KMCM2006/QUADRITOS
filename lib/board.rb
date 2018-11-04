@@ -1,4 +1,5 @@
 require './lib/point'
+require './lib/line'
 class Board
 
     def initialize(rows, columns)
@@ -9,7 +10,11 @@ class Board
             end
         end
         @horizontalLines = Array[]
-        @verticalLines = Array[]
+        for i in (1..rows) do
+            for j in (1..columns-1) do
+                @horizontalLines.push(Line.new((j*40), ((j+1)*40), 40*i, 40*i))
+            end
+        end
 
     end
 
