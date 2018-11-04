@@ -11,5 +11,5 @@ Then("deberia ver el logo del juego en la ventana principal") do
 end
   
 Then("deberia ver el boton {string}") do |start|
-    find_button(start).click
+    click_on(start).click
 end

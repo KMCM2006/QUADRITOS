@@ -32,13 +32,16 @@
                 </li>
                 <% if @username %>
                     <li class="nav-item">
-                        <div class="nav-link disabled">Bienvenido <%=@username%></div>
+                        <div class="nav-link disabled"><%=@username%></div>
                     </li>
                 <% else %>
                     <li class="nav-item active">
                         <a class="nav-link" href="/register">Registrarse</a>
                     </li>
                 <% end %>
+                <li class="nav-item disabled">
+                    <div class="nav-link disabled">GoDiegoGo</div>
+                </li>
             </ul>
         </div>
         </nav>
