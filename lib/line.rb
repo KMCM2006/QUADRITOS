@@ -1,10 +1,11 @@
 class Line
 
-    def initialize(posX1, posX2, posY1, posY2)
+    def initialize(posX1, posX2, posY1, posY2, lineId)
         @posX1 = posX1
         @posX2 = posX2
         @posY1 = posY1
         @posY2 = posY2
+        @lineId = lineId
     end
 
     def getPosX1
@@ -23,4 +24,8 @@ class Line
         return @posY2
     end
 
+    def getLineId
+        return @lineId
+    end
+    
 end

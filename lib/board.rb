@@ -3,18 +3,22 @@ require './lib/line'
 class Board
 
     def initialize(rows, columns)
+        @interval = 50
         @points = Array[]
         for i in (1..rows) do
             for j in (1..columns) do
-                @points.push(Point.new((i*40), (j*40), 5))
+                @points.push(Point.new((i*@interval), (j*@interval), 10))
             end
         end
         @horizontalLines = Array[]
         @verticalLines = Array[]
+        @lineId = 0
         for i in (1..rows) do
             for j in (1..columns-1) do
-                @horizontalLines.push(Line.new((j*40), ((j+1)*40), 40*i, 40*i))
-                @verticalLines.push(Line.new(40*i, 40*i,(j*40), ((j+1)*40)))
+                @lineId = @lineId + 1
+                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i, @lineId))
+                @lineId = @lineId + 1
+                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval), @lineId))
             end
         end
     end
