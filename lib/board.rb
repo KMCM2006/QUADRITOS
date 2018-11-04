@@ -10,12 +10,13 @@ class Board
             end
         end
         @horizontalLines = Array[]
+        @verticalLines = Array[]
         for i in (1..rows) do
             for j in (1..columns-1) do
                 @horizontalLines.push(Line.new((j*40), ((j+1)*40), 40*i, 40*i))
+                @verticalLines.push(Line.new(40*i, 40*i,(j*40), ((j+1)*40)))
             end
         end
-
     end
 
     def getPoints()
