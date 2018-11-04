@@ -1,6 +1,6 @@
 # APLICACION QUADRITOS
 
-##Para instalar Bundle
+## Para instalar Bundle
     gem install bundler
 
 ## Para instalar las gemas
