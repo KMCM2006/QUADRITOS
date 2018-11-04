@@ -4,12 +4,23 @@ require 'sinatra'
 
 class App < Sinatra::Base
 
+    @username
+    @password
+    @confirmPassword
+
     get '/' do
         erb :welcome
     end
 
     get '/modality' do
-        erb :modality
+        @username = params[:user]
+        @password = params[:password]
+        @confirmPassword = params[:confirmPassword]
+        if(@password != @confirmPassword) 
+            redirect '/register'
+        else
+            erb :modality
+        end
     end
 
     get '/register' do
@@ -17,14 +28,19 @@ class App < Sinatra::Base
     end
 
     get '/game' do
-        numberOfPlayer = params[:numberOfPlayer]
-        numberOfPlayer = numberOfPlayer.to_i
-        @players = Array[]
-        for number in (1..numberOfPlayer) do
-            @players.push([number, Player.new("Jugador "+number.to_s, 0)])
+        modality = params[:modality]
+        if(modality == "1")
+            numberPlayers = params[:numberPlayers]
+            numberPlayers = numberPlayers.to_i
+            @players = Array[]
+            for number in (1..numberPlayers) do
+                @players.push([number, Player.new("Jugador "+number.to_s, 0)])
+            end
+            @board = Board.new(7, 7)
+            erb :game
+        else
+            redirect '/modality'
         end
-        @board = Board.new(7, 7)
-        erb :game
     end
 
 end
