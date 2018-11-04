@@ -15,10 +15,10 @@ Given("visito la pagina del juego") do
     expect(page).to have_content(score)
   end
 
-  Then("se ve la opcion de {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+  Then("se ve la opcion de {string}") do |settings|
+    expect(page).to have_content(settings)
   end
 
   Then("se ve el tablero vacio") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_xpath('/html/body/div/div');
   end
