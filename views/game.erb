@@ -31,19 +31,11 @@
     <div class="container main-game">
         <div class="row">
             <div class="col-sm">
-                <table>
-                    <% @board.getRows.each do |row| %>
-                        <tr>
-                            <% @board.getColumns.each do |row| %>
-                                <th>
-                                    <svg height="50" width="50">
-                                        <circle cx="5" cy="5" r="5"/>
-                                    </svg>
-                                </th>
-                            <% end %>
-                        </tr>
+                <svg height="500" width="500">
+                    <% @board.getPoints.each do |point| %>
+                        <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
                     <% end %>
-                </table>
+                </svg>
             </div>
             <div class="col-sm">
                 <table class="table table-sm">

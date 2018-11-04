@@ -1,22 +1,28 @@
+require './lib/point'
 class Board
 
     def initialize(rows, columns)
-        @rows = Array[]
-        for number in (1..rows) do
-            @rows.push(number)
+        @points = Array[]
+        for i in (1..rows) do
+            for j in (1..columns) do
+                @points.push(Point.new((i*40), (j*40), 5))
+            end
         end
-        @columns = Array[]
-        for number in (1..columns) do
-            @columns.push(number)
-        end
+        @horizontalLines = Array[]
+        @verticalLines = Array[]
+
     end
 
-    def getRows()
-        return @rows
+    def getPoints()
+        return @points
     end
 
-    def getColumns()
-        return @columns
+    def getHorizontalLines()
+        return @horizontalLines
+    end
+
+    def getVerticalLines()
+        return @verticalLines
     end
 
 end

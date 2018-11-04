@@ -23,7 +23,6 @@ class App < Sinatra::Base
         for number in (1..numberOfPlayer) do
             @players.push([number, Player.new("Jugador "+number.to_s, 0)])
         end
-        puts numberOfPlayer
         @board = Board.new(7, 7)
         erb :game
     end
