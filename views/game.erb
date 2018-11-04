@@ -9,10 +9,56 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
+        let totalPlayer = <%=@players.length%>;
+        let currentTurn = 1;
+        let rgbValue = '#dee2e6';
         function selected(line) {
-            console.log(line.id);
-            $("#"+line.id).css('stroke', 'rgb(0,0,0)');
+            evaluateCurrentTurn();
+            $("#"+line.id).css('stroke', rgbValue);
+            $("#"+line.id).removeAttr('onclick');
+            currentTurn++;
+            evaluateCurrentTurn();
         }
+
+        function evaluateCurrentTurn() {
+            let classRow;
+            for(let i = 1; i <= totalPlayer; i++) {
+                $("#user-"+i).removeAttr('class');
+                $("#user-"+i).attr('class', '');
+                $('#user-'+i)[0].className = '';
+            }
+            switch(currentTurn) {
+                case 1:
+                    classRow = 'bg-primary';
+                    rgbValue = '#007bff';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 2:
+                    classRow = 'bg-success';
+                    rgbValue = '#28a745';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 3:
+                    classRow = 'bg-danger';
+                    rgbValue = '#dc3545';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 4:
+                    classRow = 'bg-warning';
+                    rgbValue = '#ffc107';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                default:
+                    currentTurn = 0;
+            }
+            if(currentTurn >= totalPlayer)
+                currentTurn = 0;
+        }
+        function start () {
+            classRow = 'bg-primary';
+            $("#user-1").addClass('bg-primary');
+        }
+        window.onload=start;
     </script>
 
 </head>
@@ -61,7 +107,7 @@
                     </thead>
                     <tbody>
                         <% @players.each do |player| %>
-                            <tr>
+                            <tr id="user-<%= player[0]%>">
                                 <td scope="row"><%= player[0]%></td>
                                 <td><%= player[1].getName%></td>
                                 <td><%= player[1].getScore%></td>
