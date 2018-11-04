@@ -4,14 +4,23 @@ require 'sinatra'
 
 class App < Sinatra::Base
 
-    @@username
+    @username = ""
+    @password
+    @confirmPassword
 
     get '/' do
         erb :welcome
     end
 
     get '/modality' do
-        erb :modality
+        @username = params[:user]
+        @password = params[:password]
+        @confirmPassword = params[:confirmPassword]
+        if(@password != @confirmPassword) 
+            redirect '/register'
+        else
+            erb :modality
+        end
     end
 
     get '/register' do

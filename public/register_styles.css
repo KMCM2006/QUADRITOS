@@ -3,26 +3,25 @@ body{
     background:#ffb677;
 }
 h1{
-    margin-top: 4%;
+    margin-top: 2%;
     margin-bottom: 3%;
     font-family:'Times New Roman', Times, serif;
     font-size: 270%;
 }
+
 input{
     border-radius:5px; 
     box-shadow: 2px 2px 2px 1px rgba(0,0,5,.8);
 }
+
 input#usuario{
     padding-left: 5%;
     padding-right: 5%;
     text-align: center;
 }
- 
+
 input#contrasenia{
     padding-left: 5%;
     padding-right: 5%;
     text-align: center;
 }
-
- 
- 
