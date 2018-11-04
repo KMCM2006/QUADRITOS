@@ -4,6 +4,8 @@ require 'sinatra'
 
 class App < Sinatra::Base
 
+    @@username
+
     get '/' do
         erb :welcome
     end

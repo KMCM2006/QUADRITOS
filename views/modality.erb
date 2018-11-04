@@ -10,14 +10,10 @@
     <script>  
         $(document).ready(function(){
             $('#modalitySelector').on('change', function() {
-            if ( this.value === 1 || this.value === 2)
-            {
-                $("#numberPlayerSelector").hide();
-            }
-            else
-            {                
-                $("#numberPlayerSelector").show();
-            }
+                if (this.value == 2)
+                    $("#numberPlayerSelector").hide();
+                else
+                    $("#numberPlayerSelector").show();
             });
         });
     </script>
