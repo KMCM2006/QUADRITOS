@@ -11,6 +11,11 @@ Feature: Elegir modalidad jugar contra oponentes desde la misma PC
         Given visito la pagina modalidad
         Then deberia ver el nombre del jugador "GoDiegoGo"
 
+    Scenario: modalidad jugar contra oponentes desde la misma PC
+        Given estoy en la pagina modalidad
+        When selecciono modalidad "jugar contra oponentes desde la misma PC" Opcion 1
+        Then se ve la opcion "Oponentes desde la misma PC" seleccionada
+
     Scenario: ver opcion elegir cantidad de jugadores
         Given estoy en la pagina modalidad
         Then se ve la opcion para elegir la cantidad de jugadores
