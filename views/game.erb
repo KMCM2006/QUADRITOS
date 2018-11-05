@@ -13,12 +13,68 @@
         let currentTurn = 1;
         let rgbValue = '#dee2e6';
         function selected(line) {
+            verifySquare(line);
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
             currentTurn++;
             evaluateCurrentTurn();
         }
+
+        function verifySquare(line) {
+            let values = line.id.split('-');
+            let orientation = values[0];
+            let positions = values[1].split('_');
+            if(orientation === 'H') {
+                verifiyHorizontalLineTop(positions);
+                verifiyHorizontalLineBotton(positions);
+            }
+        }
+
+        function verifiyHorizontalLineTop(positions) {
+            let topPositionsH = [];
+            let rightPositionsV = [];
+            let leftPositionsV = [];
+            topPositionsH[0] = positions[0];
+            topPositionsH[1] = positions[1];
+            topPositionsH[2] = (positions[2] - 50) + "";
+            topPositionsH[3] = (positions[3] - 50) + "";
+            rightPositionsV[0] = positions[1];
+            rightPositionsV[1] = positions[1];
+            rightPositionsV[2] = (positions[2] - 50) + "";
+            rightPositionsV[3] = positions[3];
+            leftPositionsV[0] = positions[0];
+            leftPositionsV[1] = positions[0];
+            leftPositionsV[2] = (positions[2] - 50) + "";
+            leftPositionsV[3] = positions[3];
+            let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
+            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
+            let leftIdV = "V-" + leftPositionsV[0] + "_" + leftPositionsV[1] + "_" + leftPositionsV[2] + "_" + leftPositionsV[3];
+            let tagTop = document.getElementById(topIdH);
+            let tagRight = document.getElementById(rightIdV);
+            let tagLeft = document.getElementById(leftIdV);
+            if ((tagTop !== null) && (tagRight !== null) && (tagLeft !== null)) {
+                if (($("#"+topIdH).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
+                    let score;
+                    switch (currentTurn) {
+                        case 0:
+                            score = Number($("#score-"+totalPlayer).text());
+                            score++;
+                            $("#score-"+totalPlayer).text(score+"");
+                            break;
+                        default:
+                            score = Number($("#score-"+currentTurn).text());
+                            score++;
+                            $("#score-"+currentTurn).text(score+"");
+                            break;
+                    }
+                }
+            }
+        }
+
+        
 
         function evaluateCurrentTurn() {
             let classRow;
@@ -54,10 +110,12 @@
             if(currentTurn >= totalPlayer)
                 currentTurn = 0;
         }
+
         function start () {
             classRow = 'bg-primary';
             $("#user-1").addClass('bg-primary');
         }
+
         window.onload=start;
     </script>
 
@@ -89,17 +147,17 @@
             <div class="col-sm">
                 <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
                     <% @board.getHorizontalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9" />
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% @board.getVerticalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% @board.getPoints.each do |point| %>
                         <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
                     <% end %>
                 </svg>
             </div>
-            <div class="col-sm">
+            <div class="col-sm scores">
                 <table class="table table-sm">
                     <thead>
                         <tr>
@@ -113,7 +171,7 @@
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row"><%= player[0]%></td>
                                 <td><%= player[1].getName%></td>
-                                <td><%= player[1].getScore%></td>
+                                <td id="score-<%= player[0]%>"><%= player[1].getScore%></td>
                             </tr>
                         <% end %>
                     </tbody>

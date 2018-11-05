@@ -1,4 +1,8 @@
 .main-game {
-    padding-top: 5%;
+    padding-top: 1%;
     text-align: center;
+}
+
+.scores {
+    padding-top: 5%;
 }

@@ -27,5 +27,8 @@ class Line
     def getLineId
         return @lineId
     end
-    
+
+    def getPositions
+        return @posX1.to_s + "_" + @posX2.to_s + "_" + @posY1.to_s + "_" + @posY2.to_s
+    end
 end
