@@ -74,7 +74,48 @@
             }
         }
 
-        
+        function verifiyHorizontalLineBotton(positions) {
+            let bottonPositionsH = [];
+            let rightPositionsV = [];
+            let leftPositionsV = [];
+            bottonPositionsH[0] = positions[0];
+            bottonPositionsH[1] = positions[1];
+            bottonPositionsH[2] = (positions[2] - 50 + 100) + "";
+            bottonPositionsH[3] = (positions[3] - 50 + 100) + "";
+            rightPositionsV[0] = positions[1];
+            rightPositionsV[1] = positions[1];
+            rightPositionsV[2] = positions[2];
+            rightPositionsV[3] = (positions[3] - 50 + 100) + "";
+            leftPositionsV[0] = positions[0];
+            leftPositionsV[1] = positions[0];
+            leftPositionsV[2] = positions[2];
+            leftPositionsV[3] = (positions[3] - 50 + 100) + "";
+            let bottonIdH = "H-" + bottonPositionsH[0] + "_" + bottonPositionsH[1] + "_" + bottonPositionsH[2] + "_" +bottonPositionsH[3];
+            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
+            let leftIdV = "V-" + leftPositionsV[0] + "_" + leftPositionsV[1] + "_" + leftPositionsV[2] + "_" + leftPositionsV[3];
+            let tagBotton = document.getElementById(bottonIdH);
+            let tagRight = document.getElementById(rightIdV);
+            let tagLeft = document.getElementById(leftIdV);
+            if ((tagBotton !== null) && (tagRight !== null) && (tagLeft !== null)) {
+                if (($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
+                    let score;
+                    switch (currentTurn) {
+                        case 0:
+                            score = Number($("#score-"+totalPlayer).text());
+                            score++;
+                            $("#score-"+totalPlayer).text(score+"");
+                            break;
+                        default:
+                            score = Number($("#score-"+currentTurn).text());
+                            score++;
+                            $("#score-"+currentTurn).text(score+"");
+                            break;
+                    }
+                }
+            }
+        }
 
         function evaluateCurrentTurn() {
             let classRow;
