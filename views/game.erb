@@ -25,9 +25,13 @@
             let values = line.id.split('-');
             let orientation = values[0];
             let positions = values[1].split('_');
+            console.log(line.id);
             if(orientation === 'H') {
                 verifiyHorizontalLineTop(positions);
                 verifiyHorizontalLineBotton(positions);
+            } else {
+                verifyVerticalLineRight(positions);
+                verifyVerticalLineLeft(positions);
             }
         }
 
@@ -100,6 +104,51 @@
                 if (($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
                    && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")
                    && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
+                    let score;
+                    switch (currentTurn) {
+                        case 0:
+                            score = Number($("#score-"+totalPlayer).text());
+                            score++;
+                            $("#score-"+totalPlayer).text(score+"");
+                            break;
+                        default:
+                            score = Number($("#score-"+currentTurn).text());
+                            score++;
+                            $("#score-"+currentTurn).text(score+"");
+                            break;
+                    }
+                }
+            }
+        }
+
+        function verifyVerticalLineRight(positions) {
+            console.log("verifyVerticalLineRight");
+            let topPositionsH = [];
+            let bottonPositionsH = [];
+            let rightPositionsV = [];
+            topPositionsH[0] = positions[0];
+            topPositionsH[1] = (positions[0] - 0 + 50) +"";
+            topPositionsH[2] = positions[2];
+            topPositionsH[3] = (positions[3] - 50) + "";
+            bottonPositionsH[0] = positions[1];
+            bottonPositionsH[1] = (positions[1] - 0 + 50) +"";
+            bottonPositionsH[2] = (positions[2] - 0 + 50) +"";
+            bottonPositionsH[3] = positions[3];
+            rightPositionsV[0] = (positions[0] - 50 + 100) + "";
+            rightPositionsV[1] = (positions[1] - 50 + 100) + "";
+            rightPositionsV[2] = positions[2];
+            rightPositionsV[3] = positions[3];
+            let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
+            let bottonIdH = "H-" + bottonPositionsH[0] + "_" + bottonPositionsH[1] + "_" + bottonPositionsH[2] + "_" + bottonPositionsH[3];
+            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
+            console.log(topIdH + "  --  " + bottonIdH + "  --  " + rightIdV);
+            let tagTop = document.getElementById(topIdH);
+            let tagBotton = document.getElementById(bottonIdH);
+            let tagRight = document.getElementById(rightIdV);
+            if ((tagTop !== null) && (tagBotton !== null) && (tagRight !== null)) {
+                if (($("#"+topIdH).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
+                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")) {
                     let score;
                     switch (currentTurn) {
                         case 0:
