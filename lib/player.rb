@@ -11,4 +11,9 @@ class Player
     def getScore()
         return @score
     end
+
+    def incrementScore()
+        puts "incrementScore"
+        @score = @score + 1
+    end
 end
