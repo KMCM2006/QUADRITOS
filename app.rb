@@ -4,6 +4,7 @@ require 'sinatra'
 
 class App < Sinatra::Base
 
+    @board
     @username
     @password
     @confirmPassword
@@ -41,6 +42,11 @@ class App < Sinatra::Base
         else
             redirect '/modality'
         end
+    end
+
+    get '/verify-square' do
+        @board = Board.new(7, 7)
+        @board.verifySquare(params[:positions])
     end
 
 end

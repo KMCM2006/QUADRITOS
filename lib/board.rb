@@ -25,6 +25,15 @@ class Board
         end
     end
 
+    def verifySquare(lineId)
+        puts lineId
+        values = lineId.split('-')
+        orientation = values[0]
+        positions =values[1].split('_')
+        puts orientation
+        puts positions 
+    end
+
     def getPoints()
         return @points
     end
