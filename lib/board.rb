@@ -30,8 +30,29 @@ class Board
         values = lineId.split('-')
         orientation = values[0]
         positions =values[1].split('_')
-        puts orientation
-        puts positions 
+        if(orientation == 'H')
+            verifiyHorizontalLineTop(positions)
+        else
+            puts "typeV"
+        end
+    end
+
+    def verifiyHorizontalLineTop(positions)
+        topPositionsH = Array[]
+        rightPositionsV = Array[]
+        leftPositionsV = Array[]
+        topPositionsH[0] = positions[0]
+        topPositionsH[1] = positions[1]
+        topPositionsH[2] = (positions[2].to_i - 50).to_s
+        topPositionsH[3] = (positions[3].to_i - 50).to_s
+        rightPositionsV[0] = positions[1]
+        rightPositionsV[1] = positions[1]
+        rightPositionsV[2] = (positions[2].to_i - 50).to_s
+        rightPositionsV[3] = positions[3]
+        leftPositionsV[0] = positions[0]
+        leftPositionsV[1] = positions[0]
+        leftPositionsV[2] = (positions[2].to_i - 50).to_s
+        leftPositionsV[3] = positions[3]
     end
 
     def getPoints()
