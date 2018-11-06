@@ -53,6 +53,22 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = (positions[2].to_i - 50).to_s
         leftPositionsV[3] = positions[3]
+        if exitLineWithPositions(topPositionsH)
+            && exitLineWithPositions(leftPositionsV)
+            && exitLineWithPositions(rightPositionsV)
+            return true
+        else
+            return false
+        end
+    end
+
+    def exitLineWithPositions(positions)
+        positions.each do |position|
+            if position.to_i < 50
+                return false
+            end
+        end
+        return true
     end
 
     def getPoints()
