@@ -53,9 +53,7 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = (positions[2].to_i - 50).to_s
         leftPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH)
-            && exitLineWithPositions(leftPositionsV)
-            && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(leftPositionsV) && exitLineWithPositions(rightPositionsV)
             return true
         else
             return false
@@ -78,9 +76,7 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = positions[2]
         leftPositionsV[3] = (positions[3].to_i - 50 + 100).to_s
-        if exitLineWithPositions(bottonPositionsH)
-            && exitLineWithPositions(leftPositionsV)
-            && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(bottonPositionsH) && exitLineWithPositions(leftPositionsV) && exitLineWithPositions(rightPositionsV)
             return true
         else
             return false
@@ -103,9 +99,30 @@ class Board
         rightPositionsV[1] = (positions[1].to_i - 50 + 100).to_s
         rightPositionsV[2] = positions[2]
         rightPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH)
-            && exitLineWithPositions(bottonPositionsH)
-            && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(bottonPositionsH) && exitLineWithPositions(rightPositionsV)
+            return true
+        else
+            return false
+        end
+    end
+
+    def verifyVerticalLineLeft(positions)
+        topPositionsH = Array[]
+        bottonPositionsH = Array[]
+        leftPositionsV = Array[]
+        topPositionsH[0] = (positions[0].to_i - 50).to_s
+        topPositionsH[1] = positions[1]
+        topPositionsH[2] = positions[2]
+        topPositionsH[3] = (positions[3].to_i - 50).to_s
+        bottonPositionsH[0] = positions[0]
+        bottonPositionsH[1] = positions[1]
+        bottonPositionsH[2] = (positions[2].to_i - 0 + 50).to_s
+        bottonPositionsH[3] = positions[3]
+        leftPositionsV[0] = (positions[0].to_i - 50).to_s
+        leftPositionsV[1] = (positions[1].to_i - 50).to_s
+        leftPositionsV[2] = positions[2]
+        leftPositionsV[3] = positions[3]
+        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(leftPositionsV)  && exitLineWithPositions(bottonPositionsH)
             return true
         else
             return false
