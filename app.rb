@@ -45,7 +45,8 @@ class App < Sinatra::Base
     end
 
     get '/verify-square' do
-        $board.verifySquare(params[:positions])
+        response = $board.verifySquare(params[:positions])
+        return response
     end
 
 end

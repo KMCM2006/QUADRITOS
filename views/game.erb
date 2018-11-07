@@ -31,6 +31,7 @@
                 type: 'GET',
                 url: 'verify-square?positions='+line.id,
                 success: function(response) {
+                    console.log("SUCCESS");
                     console.log(response);
                 }
             });
@@ -133,16 +134,16 @@
             let topPositionsH = [];
             let bottonPositionsH = [];
             let rightPositionsV = [];
-            topPositionsH[0] = positions[0];
-            topPositionsH[1] = (positions[0] - 0 + 50) +"";
+            topPositionsH[0] = (positions[0] - 50) +"";
+            topPositionsH[1] = positions[1]
             topPositionsH[2] = positions[2];
             topPositionsH[3] = (positions[3] - 50) + "";
-            bottonPositionsH[0] = positions[1];
-            bottonPositionsH[1] = (positions[1] - 0 + 50) +"";
+            bottonPositionsH[0] = (positions[0] - 50) +"";
+            bottonPositionsH[1] = positions[1]
             bottonPositionsH[2] = (positions[2] - 0 + 50) +"";
             bottonPositionsH[3] = positions[3];
-            rightPositionsV[0] = (positions[0] - 50 + 100) + "";
-            rightPositionsV[1] = (positions[1] - 50 + 100) + "";
+            rightPositionsV[0] = (positions[0] - 50) + "";
+            rightPositionsV[1] = (positions[1] - 50) + "";
             rightPositionsV[2] = positions[2];
             rightPositionsV[3] = positions[3];
             let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
@@ -176,16 +177,16 @@
             let topPositionsH = [];
             let bottonPositionsH = [];
             let leftPositionsV = [];
-            topPositionsH[0] = (positions[0] - 50) +""
-            topPositionsH[1] = positions[1];
+            topPositionsH[0] = positions[0]
+            topPositionsH[1] = (positions[1] - 0 + 50) +"";
             topPositionsH[2] = positions[2];
             topPositionsH[3] = (positions[3] - 50) + "";
             bottonPositionsH[0] = positions[0];
-            bottonPositionsH[1] = positions[1];
+            bottonPositionsH[1] = (positions[1] - 0 + 50) +"";
             bottonPositionsH[2] = (positions[2] - 0 + 50) +"";
             bottonPositionsH[3] = positions[3];
-            leftPositionsV[0] = (positions[0] - 50) + "";
-            leftPositionsV[1] = (positions[1] - 50) + "";
+            leftPositionsV[0] = (positions[0] - 0 + 50) + "";
+            leftPositionsV[1] = (positions[1] - 0 + 50) + "";
             leftPositionsV[2] = positions[2];
             leftPositionsV[3] = positions[3];
             let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
@@ -286,10 +287,10 @@
             <div class="col-sm">
                 <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
                     <% $board.getHorizontalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>-<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% $board.getVerticalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>-<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% $board.getPoints.each do |point| %>
                         <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
