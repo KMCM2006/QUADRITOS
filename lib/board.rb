@@ -87,6 +87,30 @@ class Board
         end
     end
 
+    def verifyVerticalLineRight(positions)
+        topPositionsH = Array[]
+        bottonPositionsH = Array[]
+        rightPositionsV = Array[]
+        topPositionsH[0] = positions[0]
+        topPositionsH[1] = (positions[0].to_i - 0 + 50).to_s
+        topPositionsH[2] = positions[2]
+        topPositionsH[3] = (positions[3].to_i - 50)
+        bottonPositionsH[0] = positions[1]
+        bottonPositionsH[1] = (positions[1].to_i - 0 + 50).to_s
+        bottonPositionsH[2] = (positions[2].to_i - 0 + 50).to_s
+        bottonPositionsH[3] = positions[3]
+        rightPositionsV[0] = (positions[0].to_i - 50 + 100).to_s
+        rightPositionsV[1] = (positions[1].to_i - 50 + 100).to_s
+        rightPositionsV[2] = positions[2]
+        rightPositionsV[3] = positions[3]
+        if exitLineWithPositions(topPositionsH)
+            && exitLineWithPositions(bottonPositionsH)
+            && exitLineWithPositions(rightPositionsV)
+            return true
+        else
+            return false
+        end
+    end
 
     def exitLineWithPositions(positions)
         positions.each do |position|
