@@ -4,7 +4,7 @@ require 'sinatra'
 
 class App < Sinatra::Base
 
-    @board
+    $board
     @username
     @password
     @confirmPassword
@@ -37,7 +37,7 @@ class App < Sinatra::Base
             for number in (1..numberPlayers) do
                 @players.push([number, Player.new("Jugador "+number.to_s, 0)])
             end
-            @board = Board.new(7, 7)
+            $board = Board.new(7, 7)
             erb :game
         else
             redirect '/modality'
@@ -45,8 +45,8 @@ class App < Sinatra::Base
     end
 
     get '/verify-square' do
-        @board = Board.new(7, 7)
-        @board.verifySquare(params[:positions])
+        $board = Board.new(7, 7)
+        $board.verifySquare(params[:positions])
     end
 
 end
