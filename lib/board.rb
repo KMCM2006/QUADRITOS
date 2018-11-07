@@ -32,11 +32,11 @@ class Board
         positions =values[1].split('_')
         udpateLineByLineId(orientation, positions)
         if(orientation == 'H')
-            result = result + verifiyHorizontalLineTop(positions).to_s + "T"
-            result = result + verifiyHorizontalLineBotton(positions).to_s + "B"
+            result = result + verifiyHorizontalLineTop(positions).to_s
+            result = result + verifiyHorizontalLineBotton(positions).to_s
         else
-            result = result + verifyVerticalLineRight(positions).to_s + "R"
-            result = result + verifyVerticalLineLeft(positions).to_s + "L"
+            result = result + verifyVerticalLineRight(positions).to_s
+            result = result + verifyVerticalLineLeft(positions).to_s
         end
         return result
     end

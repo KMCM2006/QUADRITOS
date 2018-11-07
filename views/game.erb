@@ -11,7 +11,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
     <script>
-        let totalPlayer = <%=@players.length%>;
+        let totalPlayer = <%=$game.getPlayers.length%>;
         let currentTurn = 1;
         let rgbValue = '#dee2e6';
         function selected(line) {
@@ -24,14 +24,10 @@
         }
 
         function verifySquare(line) {
-            let values = line.id.split('-');
-            let orientation = values[0];
-            let positions = values[1].split('_');
             $.ajax({
                 type: 'GET',
                 url: 'verify-square?positions='+line.id,
                 success: function(response) {
-                    console.log("SUCCESS");
                     if(response.includes('true')) {
                         let score;
                         switch (currentTurn) {
@@ -121,13 +117,13 @@
         <div class="row">
             <div class="col-sm">
                 <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
-                    <% $board.getHorizontalLines.each do |line| %>
+                    <% $game.getBoard.getHorizontalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
-                    <% $board.getVerticalLines.each do |line| %>
+                    <% $game.getBoard.getVerticalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
-                    <% $board.getPoints.each do |point| %>
+                    <% $game.getBoard.getPoints.each do |point| %>
                         <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
                     <% end %>
                 </svg>
@@ -142,7 +138,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @players.each do |player| %>
+                        <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row"><%= player[0]%></td>
                                 <td><%= player[1].getName%></td>
