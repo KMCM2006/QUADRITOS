@@ -15,12 +15,16 @@
         let currentTurn = 1;
         let rgbValue = '#dee2e6';
         function selected(line) {
+            console.log("start selected");
+            console.log(currentTurn);
             verifySquare(line);
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
             currentTurn++;
             evaluateCurrentTurn();
+            console.log("end selected");
+            console.log(currentTurn);
         }
 
         function verifySquare(line) {
@@ -30,6 +34,8 @@
                 success: function(response) {
                     if(response.includes('true')) {
                         let score;
+                        console.log("verifySquare()");
+                        console.log(currentTurn);
                         switch (currentTurn) {
                             case 0:
                                 score = Number($("#score-"+totalPlayer).text());

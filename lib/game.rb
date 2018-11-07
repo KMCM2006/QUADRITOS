@@ -18,4 +18,11 @@ class Game
         return @players
     end
 
+    def incrementScoreOfPlayer(currentTurn)
+        if(currentTurn.to_i == 0)
+            @players[@players.length.to_i-1][1].incrementScore
+        end
+        @players[currentTurn.to_i][1].incrementScore
+    end
+
 end
