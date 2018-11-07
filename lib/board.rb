@@ -108,7 +108,7 @@ class Board
         topPositionsH[3] = (positions[3].to_i - 50).to_s
         bottonPositionsH[0] = positions[0]
         bottonPositionsH[1] = (positions[1].to_i - 0 + 50).to_s
-        bottonPositionsH[2] = (positions[2] - 0 + 50).to_s
+        bottonPositionsH[2] = (positions[2].to_i - 0 + 50).to_s
         bottonPositionsH[3] = positions[3]
         leftPositionsV[0] = (positions[0].to_i - 0 + 50).to_s
         leftPositionsV[1] = (positions[1].to_i - 0 + 50).to_s
