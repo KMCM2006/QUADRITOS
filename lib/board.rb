@@ -25,21 +25,22 @@ class Board
         end
     end
 
-    def verifySquare(lineId)
-        puts lineId
-        values = lineId.split('-')
+    def verifySquare(line)
+        values = line.split('-')
         orientation = values[0]
         positions =values[1].split('_')
+        lineId = values[2]
+        udpateLineByLineId(orientation, lineId)
         if(orientation == 'H')
-            verifiyHorizontalLineTop(positions)
-            verifiyHorizontalLineBotton(positions)
+            verifiyHorizontalLineTop(positions, lineId)
+            verifiyHorizontalLineBotton(positions, lineId)
         else
-            verifyVerticalLineRight(positions)
-            verifyVerticalLineLeft(positions)
+            verifyVerticalLineRight(positions, lineId)
+            verifyVerticalLineLeft(positions, lineId)
         end
     end
 
-    def verifiyHorizontalLineTop(positions)
+    def verifiyHorizontalLineTop(positions, lineId)
         topPositionsH = Array[]
         rightPositionsV = Array[]
         leftPositionsV = Array[]
@@ -55,16 +56,16 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = (positions[2].to_i - 50).to_s
         leftPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH)
-            && exitLineWithPositions(leftPositionsV)
-            && exitLineWithPositions(rightPositionsV)
-            return true
+        if isLineValid(topPositionsH)
+            && isLineValid(leftPositionsV)
+            && isLineValid(rightPositionsV)
+            return ()
         else
             return false
         end
     end
 
-    def verifiyHorizontalLineBotton(positions)
+    def verifiyHorizontalLineBotton(positions, lineId)
         bottonPositionsH = Array[]
         rightPositionsV = Array[]
         leftPositionsV = Array[]
@@ -80,16 +81,16 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = positions[2]
         leftPositionsV[3] = (positions[3].to_i - 50 + 100).to_s
-        if exitLineWithPositions(bottonPositionsH)
-            && exitLineWithPositions(leftPositionsV)
-            && exitLineWithPositions(rightPositionsV)
+        if isLineValid(bottonPositionsH)
+            && isLineValid(leftPositionsV)
+            && isLineValid(rightPositionsV)
             return true
         else
             return false
         end
     end
 
-    def verifyVerticalLineRight(positions)
+    def verifyVerticalLineRight(positions, lineId)
         topPositionsH = Array[]
         bottonPositionsH = Array[]
         rightPositionsV = Array[]
@@ -105,16 +106,16 @@ class Board
         rightPositionsV[1] = (positions[1].to_i - 50 + 100).to_s
         rightPositionsV[2] = positions[2]
         rightPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH)
-            && exitLineWithPositions(bottonPositionsH)
-            && exitLineWithPositions(rightPositionsV)
+        if isLineValid(topPositionsH)
+            && isLineValid(bottonPositionsH)
+            && isLineValid(rightPositionsV)
             return true
         else
             return false
         end
     end
 
-    def verifyVerticalLineLeft(positions)
+    def verifyVerticalLineLeft(positions, lineId)
         topPositionsH = Array[]
         bottonPositionsH = Array[]
         leftPositionsV = Array[]
@@ -130,22 +131,40 @@ class Board
         leftPositionsV[1] = (positions[1].to_i - 50).to_s
         leftPositionsV[2] = positions[2]
         leftPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH)
-            && exitLineWithPositions(leftPositionsV)
-            && exitLineWithPositions(bottonPositionsH)
+        if isLineValid(topPositionsH)
+            && isLineValid(leftPositionsV)
+            && isLineValid(bottonPositionsH)
             return true
         else
             return false
         end
     end
 
-    def exitLineWithPositions(positions)
+    def isLineValid(positions)
         positions.each do |position|
             if position.to_i < 50
                 return false
             end
         end
         return true
+    end
+
+    def udpateLineByLineId(lineId)
+        if(orientation == 'H')
+            @horizontalLines.each do |line|
+                if(line.getLineId == lineId)
+                    line.toVisible
+                    break
+                end
+            end
+        else
+            @verticalLines.each do |line|
+                if(line.getLineId == lineId)
+                    line.toVisible
+                    break
+                end
+            end
+        end
     end
 
     def getPoints()

@@ -286,10 +286,10 @@
             <div class="col-sm">
                 <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
                     <% $board.getHorizontalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>-<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% $board.getVerticalLines.each do |line| %>
-                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>-<%=line.getLineId%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
                     <% $board.getPoints.each do |point| %>
                         <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
