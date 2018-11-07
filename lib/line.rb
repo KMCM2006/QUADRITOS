@@ -6,6 +6,15 @@ class Line
         @posY1 = posY1
         @posY2 = posY2
         @lineId = lineId
+        @visible = false
+    end
+
+    def isItVisible
+        return @visible
+    end
+
+    def toVisible
+        @visible = true
     end
 
     def getPosX1

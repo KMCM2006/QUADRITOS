@@ -45,7 +45,6 @@ class App < Sinatra::Base
     end
 
     get '/verify-square' do
-        $board = Board.new(7, 7)
         $board.verifySquare(params[:positions])
     end
 

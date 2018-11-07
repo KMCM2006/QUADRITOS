@@ -32,8 +32,10 @@ class Board
         positions =values[1].split('_')
         if(orientation == 'H')
             verifiyHorizontalLineTop(positions)
+            verifiyHorizontalLineBotton(positions)
         else
-            puts "typeV"
+            verifyVerticalLineRight(positions)
+            verifyVerticalLineLeft(positions)
         end
     end
 
@@ -53,7 +55,9 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = (positions[2].to_i - 50).to_s
         leftPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(leftPositionsV) && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(topPositionsH)
+            && exitLineWithPositions(leftPositionsV)
+            && exitLineWithPositions(rightPositionsV)
             return true
         else
             return false
@@ -66,7 +70,7 @@ class Board
         leftPositionsV = Array[]
         bottonPositionsH[0] = positions[0]
         bottonPositionsH[1] = positions[1]
-        bottonPositionsH[2] = (positions[2].to_i - 50 + 100).to_s 
+        bottonPositionsH[2] = (positions[2].to_i - 50 + 100).to_s
         bottonPositionsH[3] = (positions[3].to_i - 50 + 100).to_s
         rightPositionsV[0] = positions[1]
         rightPositionsV[1] = positions[1]
@@ -76,7 +80,9 @@ class Board
         leftPositionsV[1] = positions[0]
         leftPositionsV[2] = positions[2]
         leftPositionsV[3] = (positions[3].to_i - 50 + 100).to_s
-        if exitLineWithPositions(bottonPositionsH) && exitLineWithPositions(leftPositionsV) && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(bottonPositionsH)
+            && exitLineWithPositions(leftPositionsV)
+            && exitLineWithPositions(rightPositionsV)
             return true
         else
             return false
@@ -99,7 +105,9 @@ class Board
         rightPositionsV[1] = (positions[1].to_i - 50 + 100).to_s
         rightPositionsV[2] = positions[2]
         rightPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(bottonPositionsH) && exitLineWithPositions(rightPositionsV)
+        if exitLineWithPositions(topPositionsH)
+            && exitLineWithPositions(bottonPositionsH)
+            && exitLineWithPositions(rightPositionsV)
             return true
         else
             return false
@@ -122,7 +130,9 @@ class Board
         leftPositionsV[1] = (positions[1].to_i - 50).to_s
         leftPositionsV[2] = positions[2]
         leftPositionsV[3] = positions[3]
-        if exitLineWithPositions(topPositionsH) && exitLineWithPositions(leftPositionsV)  && exitLineWithPositions(bottonPositionsH)
+        if exitLineWithPositions(topPositionsH)
+            && exitLineWithPositions(leftPositionsV)
+            && exitLineWithPositions(bottonPositionsH)
             return true
         else
             return false
