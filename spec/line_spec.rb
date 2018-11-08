@@ -26,4 +26,17 @@ describe "Pruebas de la clase Line" do
         expect(@line.getLineId()).to eq 1
     end
 
+    it "deberia crearse una linea que no este visible" do
+        expect(@line.isItVisible()).to eq false
+    end
+
+    it "deberia hacerse visible" do
+        @line.toVisible
+        expect(@line.isItVisible()).to eq true
+    end
+
+    it "deberia retornar las posiciones de la linea" do
+        expect(@line.getPositions()).to eq "10_10_20_20"
+    end
+
 end
