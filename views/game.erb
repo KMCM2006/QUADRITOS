@@ -26,23 +26,17 @@
         }
 
         function verifySquare(line) {
+            let tempTurn;
+            tempTurn = currentTurn
             $.ajax({
                 type: 'GET',
-                url: 'verify-square?positions='+line.id,
+                url: 'verify-square?positions='+line.id+'&currentTurn='+tempTurn,
                 success: function(response) {
                     if(response.includes('true')) {
                         let score;
-                        console.log("verifySquare()");
-                        console.log(currentTurn);
-                        if(currentTurn == 1) {
-                            score = Number($("#score-"+totalPlayer).text());
-                            score++;
-                            $("#score-"+totalPlayer).text(score+"");
-                        } else {
-                            score = Number($("#score-"+(currentTurn-1)).text());
-                            score++;
-                            $("#score-"+(currentTurn-1)).text(score+"");
-                        }
+                        score = Number($("#score-"+tempTurn).text());
+                        score++;
+                        $("#score-"+tempTurn).text(score+"");
                     }
                 }
             });
