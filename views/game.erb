@@ -26,7 +26,6 @@
         }
 
         function verifySquare(line) {
-            console.log(line.id)
             let tempTurn;
             tempTurn = currentTurn
             $.ajax({
@@ -38,6 +37,9 @@
                         score = Number($("#score-"+tempTurn).text());
                         score++;
                         $("#score-"+tempTurn).text(score+"");
+                        $('#alertMessage').fadeIn('slow', function(){
+                            $('#alertMessage').delay(2000).fadeOut();
+                        });
                     }
                 }
             });
@@ -141,6 +143,11 @@
                         <% end %>
                     </tbody>
                 </table>
+                <div>
+                    <div class="alert alert-success" role="alert" id="alertMessage" style="display: none;">
+                        Enhorabuena
+                    </div>
+                </div>
             </div>
         </div>
     </div>
