@@ -1,9 +1,9 @@
-require './lib/board'
-require './lib/player'
+require './lib/game'
 require 'sinatra'
 
 class App < Sinatra::Base
 
+    $game
     @username
     @password
     @confirmPassword
@@ -32,15 +32,19 @@ class App < Sinatra::Base
         if(modality == "1")
             numberPlayers = params[:numberPlayers]
             numberPlayers = numberPlayers.to_i
-            @players = Array[]
-            for number in (1..numberPlayers) do
-                @players.push([number, Player.new("Jugador "+number.to_s, 0)])
-            end
-            @board = Board.new(7, 7)
+            $game = Game.new(7, 7, numberPlayers)
             erb :game
         else
             redirect '/modality'
         end
+    end
+
+    get '/verify-square' do
+        response = $game.getBoard.verifySquare(params[:positions])
+        if response.include? 'true'
+            $game.incrementScoreOfPlayer(params[:currentTurn])
+        end
+        return response
     end
 
 end

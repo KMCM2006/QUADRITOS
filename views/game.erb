@@ -8,202 +8,41 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
     <script>
-        let totalPlayer = <%=@players.length%>;
+        let totalPlayer = <%=$game.getPlayers.length%>;
         let currentTurn = 1;
         let rgbValue = '#dee2e6';
         function selected(line) {
-            verifySquare(line);
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
+            verifySquare(line);
             currentTurn++;
+            if(currentTurn > totalPlayer)
+                currentTurn = 1;
             evaluateCurrentTurn();
         }
 
         function verifySquare(line) {
-            let values = line.id.split('-');
-            let orientation = values[0];
-            let positions = values[1].split('_');
-            if(orientation === 'H') {
-                verifiyHorizontalLineTop(positions);
-                verifiyHorizontalLineBotton(positions);
-            } else {
-                verifyVerticalLineRight(positions);
-                verifyVerticalLineLeft(positions);
-            }
-        }
-
-        function verifiyHorizontalLineTop(positions) {
-            let topPositionsH = [];
-            let rightPositionsV = [];
-            let leftPositionsV = [];
-            topPositionsH[0] = positions[0];
-            topPositionsH[1] = positions[1];
-            topPositionsH[2] = (positions[2] - 50) + "";
-            topPositionsH[3] = (positions[3] - 50) + "";
-            rightPositionsV[0] = positions[1];
-            rightPositionsV[1] = positions[1];
-            rightPositionsV[2] = (positions[2] - 50) + "";
-            rightPositionsV[3] = positions[3];
-            leftPositionsV[0] = positions[0];
-            leftPositionsV[1] = positions[0];
-            leftPositionsV[2] = (positions[2] - 50) + "";
-            leftPositionsV[3] = positions[3];
-            let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
-            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
-            let leftIdV = "V-" + leftPositionsV[0] + "_" + leftPositionsV[1] + "_" + leftPositionsV[2] + "_" + leftPositionsV[3];
-            let tagTop = document.getElementById(topIdH);
-            let tagRight = document.getElementById(rightIdV);
-            let tagLeft = document.getElementById(leftIdV);
-            if ((tagTop !== null) && (tagRight !== null) && (tagLeft !== null)) {
-                if (($("#"+topIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
-                    let score;
-                    switch (currentTurn) {
-                        case 0:
-                            score = Number($("#score-"+totalPlayer).text());
-                            score++;
-                            $("#score-"+totalPlayer).text(score+"");
-                            break;
-                        default:
-                            score = Number($("#score-"+currentTurn).text());
-                            score++;
-                            $("#score-"+currentTurn).text(score+"");
-                            break;
+            let tempTurn;
+            tempTurn = currentTurn
+            $.ajax({
+                type: 'GET',
+                url: 'verify-square?positions='+line.id+'&currentTurn='+tempTurn,
+                success: function(response) {
+                    if(response.includes('true')) {
+                        let score;
+                        score = Number($("#score-"+tempTurn).text());
+                        score++;
+                        $("#score-"+tempTurn).text(score+"");
+                        $('#alertMessage').fadeIn('slow', function(){
+                            $('#alertMessage').delay(2000).fadeOut();
+                        });
                     }
                 }
-            }
-        }
-
-        function verifiyHorizontalLineBotton(positions) {
-            let bottonPositionsH = [];
-            let rightPositionsV = [];
-            let leftPositionsV = [];
-            bottonPositionsH[0] = positions[0];
-            bottonPositionsH[1] = positions[1];
-            bottonPositionsH[2] = (positions[2] - 50 + 100) + "";
-            bottonPositionsH[3] = (positions[3] - 50 + 100) + "";
-            rightPositionsV[0] = positions[1];
-            rightPositionsV[1] = positions[1];
-            rightPositionsV[2] = positions[2];
-            rightPositionsV[3] = (positions[3] - 50 + 100) + "";
-            leftPositionsV[0] = positions[0];
-            leftPositionsV[1] = positions[0];
-            leftPositionsV[2] = positions[2];
-            leftPositionsV[3] = (positions[3] - 50 + 100) + "";
-            let bottonIdH = "H-" + bottonPositionsH[0] + "_" + bottonPositionsH[1] + "_" + bottonPositionsH[2] + "_" +bottonPositionsH[3];
-            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
-            let leftIdV = "V-" + leftPositionsV[0] + "_" + leftPositionsV[1] + "_" + leftPositionsV[2] + "_" + leftPositionsV[3];
-            let tagBotton = document.getElementById(bottonIdH);
-            let tagRight = document.getElementById(rightIdV);
-            let tagLeft = document.getElementById(leftIdV);
-            if ((tagBotton !== null) && (tagRight !== null) && (tagLeft !== null)) {
-                if (($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
-                    let score;
-                    switch (currentTurn) {
-                        case 0:
-                            score = Number($("#score-"+totalPlayer).text());
-                            score++;
-                            $("#score-"+totalPlayer).text(score+"");
-                            break;
-                        default:
-                            score = Number($("#score-"+currentTurn).text());
-                            score++;
-                            $("#score-"+currentTurn).text(score+"");
-                            break;
-                    }
-                }
-            }
-        }
-
-        function verifyVerticalLineRight(positions) {
-            let topPositionsH = [];
-            let bottonPositionsH = [];
-            let rightPositionsV = [];
-            topPositionsH[0] = positions[0];
-            topPositionsH[1] = (positions[0] - 0 + 50) +"";
-            topPositionsH[2] = positions[2];
-            topPositionsH[3] = (positions[3] - 50) + "";
-            bottonPositionsH[0] = positions[1];
-            bottonPositionsH[1] = (positions[1] - 0 + 50) +"";
-            bottonPositionsH[2] = (positions[2] - 0 + 50) +"";
-            bottonPositionsH[3] = positions[3];
-            rightPositionsV[0] = (positions[0] - 50 + 100) + "";
-            rightPositionsV[1] = (positions[1] - 50 + 100) + "";
-            rightPositionsV[2] = positions[2];
-            rightPositionsV[3] = positions[3];
-            let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
-            let bottonIdH = "H-" + bottonPositionsH[0] + "_" + bottonPositionsH[1] + "_" + bottonPositionsH[2] + "_" + bottonPositionsH[3];
-            let rightIdV = "V-" + rightPositionsV[0] + "_" + rightPositionsV[1] + "_" + rightPositionsV[2] + "_" + rightPositionsV[3];
-            let tagTop = document.getElementById(topIdH);
-            let tagBotton = document.getElementById(bottonIdH);
-            let tagRight = document.getElementById(rightIdV);
-            if ((tagTop !== null) && (tagBotton !== null) && (tagRight !== null)) {
-                if (($("#"+topIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+rightIdV).css('stroke') !== "rgb(107, 213, 225)")) {
-                    let score;
-                    switch (currentTurn) {
-                        case 0:
-                            score = Number($("#score-"+totalPlayer).text());
-                            score++;
-                            $("#score-"+totalPlayer).text(score+"");
-                            break;
-                        default:
-                            score = Number($("#score-"+currentTurn).text());
-                            score++;
-                            $("#score-"+currentTurn).text(score+"");
-                            break;
-                    }
-                }
-            }
-        }
-
-        function verifyVerticalLineLeft(positions) {
-            let topPositionsH = [];
-            let bottonPositionsH = [];
-            let leftPositionsV = [];
-            topPositionsH[0] = (positions[0] - 50) +""
-            topPositionsH[1] = positions[1];
-            topPositionsH[2] = positions[2];
-            topPositionsH[3] = (positions[3] - 50) + "";
-            bottonPositionsH[0] = positions[0];
-            bottonPositionsH[1] = positions[1];
-            bottonPositionsH[2] = (positions[2] - 0 + 50) +"";
-            bottonPositionsH[3] = positions[3];
-            leftPositionsV[0] = (positions[0] - 50) + "";
-            leftPositionsV[1] = (positions[1] - 50) + "";
-            leftPositionsV[2] = positions[2];
-            leftPositionsV[3] = positions[3];
-            let topIdH = "H-" + topPositionsH[0] + "_" + topPositionsH[1] + "_" + topPositionsH[2] + "_" +topPositionsH[3];
-            let bottonIdH = "H-" + bottonPositionsH[0] + "_" + bottonPositionsH[1] + "_" + bottonPositionsH[2] + "_" + bottonPositionsH[3];
-            let leftIdV = "V-" + leftPositionsV[0] + "_" + leftPositionsV[1] + "_" + leftPositionsV[2] + "_" + leftPositionsV[3];
-            let tagTop = document.getElementById(topIdH);
-            let tagBotton = document.getElementById(bottonIdH);
-            let tagLeft = document.getElementById(leftIdV);
-            if ((tagTop !== null) && (tagBotton !== null) && (tagLeft !== null)) {
-                if (($("#"+topIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+bottonIdH).css('stroke') !== "rgb(107, 213, 225)")
-                   && ($("#"+leftIdV).css('stroke') !== "rgb(107, 213, 225)")) {
-                    let score;
-                    switch (currentTurn) {
-                        case 0:
-                            score = Number($("#score-"+totalPlayer).text());
-                            score++;
-                            $("#score-"+totalPlayer).text(score+"");
-                            break;
-                        default:
-                            score = Number($("#score-"+currentTurn).text());
-                            score++;
-                            $("#score-"+currentTurn).text(score+"");
-                            break;
-                    }
-                }
-            }
+            });
         }
 
         function evaluateCurrentTurn() {
@@ -237,8 +76,6 @@
                 default:
                     currentTurn = 0;
             }
-            if(currentTurn >= totalPlayer)
-                currentTurn = 0;
         }
 
         function start () {
@@ -252,7 +89,7 @@
 </head>
 
 <body style="background:rgb(107,213,225)">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <div class="navbar-brand"><img src="logo.jpg" height="42" width="42"/></div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -276,13 +113,13 @@
         <div class="row">
             <div class="col-sm">
                 <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
-                    <% @board.getHorizontalLines.each do |line| %>
+                    <% $game.getBoard.getHorizontalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
-                    <% @board.getVerticalLines.each do |line| %>
+                    <% $game.getBoard.getVerticalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
-                    <% @board.getPoints.each do |point| %>
+                    <% $game.getBoard.getPoints.each do |point| %>
                         <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
                     <% end %>
                 </svg>
@@ -297,7 +134,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% @players.each do |player| %>
+                        <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row"><%= player[0]%></td>
                                 <td><%= player[1].getName%></td>
@@ -306,6 +143,11 @@
                         <% end %>
                     </tbody>
                 </table>
+                <div>
+                    <div class="alert alert-success" role="alert" id="alertMessage" style="display: none;">
+                        Enhorabuena
+                    </div>
+                </div>
             </div>
         </div>
     </div>
