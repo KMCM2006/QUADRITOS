@@ -19,10 +19,11 @@ class Game
     end
 
     def incrementScoreOfPlayer(currentTurn)
-        if(currentTurn.to_i == 0)
-            @players[@players.length.to_i-1][1].incrementScore
+        @players.each do |number, player|
+            if number == currentTurn
+                player.incrementScore
+            end
         end
-        @players[currentTurn.to_i][1].incrementScore
     end
 
 end

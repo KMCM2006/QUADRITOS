@@ -41,6 +41,7 @@ class App < Sinatra::Base
 
     get '/verify-square' do
         response = $game.getBoard.verifySquare(params[:positions])
+        $game.incrementScoreOfPlayer(1)
         return response
     end
 

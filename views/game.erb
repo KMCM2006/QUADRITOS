@@ -15,16 +15,14 @@
         let currentTurn = 1;
         let rgbValue = '#dee2e6';
         function selected(line) {
-            console.log("start selected");
-            console.log(currentTurn);
-            verifySquare(line);
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
+            verifySquare(line);
             currentTurn++;
+            if(currentTurn > totalPlayer)
+                currentTurn = 1;
             evaluateCurrentTurn();
-            console.log("end selected");
-            console.log(currentTurn);
         }
 
         function verifySquare(line) {
@@ -36,17 +34,14 @@
                         let score;
                         console.log("verifySquare()");
                         console.log(currentTurn);
-                        switch (currentTurn) {
-                            case 0:
-                                score = Number($("#score-"+totalPlayer).text());
-                                score++;
-                                $("#score-"+totalPlayer).text(score+"");
-                                break;
-                            default:
-                                score = Number($("#score-"+currentTurn).text());
-                                score++;
-                                $("#score-"+currentTurn).text(score+"");
-                                break;
+                        if(currentTurn == 1) {
+                            score = Number($("#score-"+totalPlayer).text());
+                            score++;
+                            $("#score-"+totalPlayer).text(score+"");
+                        } else {
+                            score = Number($("#score-"+(currentTurn-1)).text());
+                            score++;
+                            $("#score-"+(currentTurn-1)).text(score+"");
                         }
                     }
                 }
@@ -84,8 +79,6 @@
                 default:
                     currentTurn = 0;
             }
-            if(currentTurn >= totalPlayer)
-                currentTurn = 0;
         }
 
         function start () {
