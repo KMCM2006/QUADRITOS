@@ -30,7 +30,7 @@ class Board
         values = line.split('-')
         orientation = values[0]
         positions =values[1].split('_')
-        udpateLineByLineId(orientation, positions)
+        udpateLine(orientation, positions)
         if(orientation == 'H')
             result = result + verifiyHorizontalLineTop(positions).to_s
             result = result + verifiyHorizontalLineBotton(positions).to_s
@@ -144,7 +144,7 @@ class Board
         return false
     end
 
-    def udpateLineByLineId(orientation, positions)
+    def udpateLine(orientation, positions)
         positions = positions[0].to_s + '_' + positions[1].to_s + '_' + positions[2].to_s + '_' + positions[3].to_s
         if(orientation == 'H')
             @horizontalLines.each do |line|
