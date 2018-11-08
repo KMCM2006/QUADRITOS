@@ -44,7 +44,7 @@ class App < Sinatra::Base
         if response.include? 'true'
             $game.incrementScoreOfPlayer(params[:currentTurn])
         end
-        return response
+        return "{\"response\": \""+ response + "\"}"
     end
 
 end
