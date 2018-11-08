@@ -19,4 +19,9 @@ describe 'Pruebas de la clase Board' do
         expect(@board.isLineVisible('V',[350, 350, 50, 100])).to eq true
     end
 
+    it "deberia hacerse visible la linea en la orientacion 'H' con las posiciones '300 350 100 100'" do
+        @board.udpateLine('H',[300, 350, 100, 100])
+        expect(@board.isLineVisible('H',[300, 350, 100, 100])).to eq true
+    end
+
 end
