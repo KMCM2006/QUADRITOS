@@ -28,11 +28,11 @@ class App < Sinatra::Base
     end
 
     get '/game' do
-        modality = params[:modality]
-        if(modality == "1")
-            numberPlayers = params[:numberPlayers]
-            numberPlayers = numberPlayers.to_i
-            $game = Game.new(7, 7, numberPlayers)
+        $modality = params[:modality]
+        if($modality == "1")
+            $numberPlayers = params[:numberPlayers]
+            $numberPlayers = $numberPlayers.to_i
+            $game = Game.new(7, 7, $numberPlayers)
             erb :game
         else
             redirect '/modality'

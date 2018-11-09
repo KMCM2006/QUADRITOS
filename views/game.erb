@@ -36,20 +36,19 @@
                     score = Number($("#score-"+tempTurn).text());
                     score++;
                     $("#score-"+tempTurn).text(score+"");
+                    $("#scorem-"+tempTurn).text(score+"");
                     $('#alertMessage').css("display","block");
                     setTimeout(function(){
                         $('#alertMessage').css("display","none");
                     }, 2000);
-                    $('#exampleModal').modal('show');
                     for(let i = 1; i <= totalPlayer; i++) {
                         $("#icon-"+i).css("display","none");
+                        $("#iconm-"+i).css("display","none");
                     }
                     $("#icon-"+response["winner"]).css("display","block");
+                    $("#iconm-"+response["winner"]).css("display","block");
                     if(response["ended"].includes('true')) {
-                        let name = $("#name-"+response["winner"]).text();
-                        let res = confirm("El ganador es " + name + ".\n ¿Quiere jugar otra vez?");
-                        if(res) console.log("SI");
-                        else console.log("NO");
+                        $('#exampleModal').modal('show');
                     }
                 }
             });
@@ -175,17 +174,40 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Juego terminado</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Puntaje</th>
+                                <th scope="col">Ganando</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% $game.getPlayers.each do |player| %>
+                                <tr>
+                                    <td>
+                                        <%= player[1].getName%>
+                                    </td>
+                                    <td id="scorem-<%= player[0]%>">
+                                        <%= player[1].getScore%>
+                                    </td>
+                                    <td  id="iconm-<%= player[0]%>" style="display:none;">
+                                        <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>">Reinciar Partida</a>
+                    <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
                 </div>
             </div>
         </div>
