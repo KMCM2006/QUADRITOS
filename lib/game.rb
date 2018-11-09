@@ -19,10 +19,17 @@ class Game
     end
 
     def incrementScoreOfPlayer(currentTurn)
+        currentTurn = currentTurn.to_i
         @players.each do |number, player|
             if number == currentTurn
                 player.incrementScore
             end
+        end
+    end
+
+    def getWinner()
+        @players.max_by do |number, player|
+            player.getScore
         end
     end
 

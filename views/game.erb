@@ -31,16 +31,25 @@
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                let resp = JSON.stringify(response);
-                 if(resp.includes('true')) {
+                if(response["response"].includes('true')) {
                     let score;
                     score = Number($("#score-"+tempTurn).text());
                     score++;
                     $("#score-"+tempTurn).text(score+"");
+                    $("#scorem-"+tempTurn).text(score+"");
                     $('#alertMessage').css("display","block");
                     setTimeout(function(){
                         $('#alertMessage').css("display","none");
                     }, 2000);
+                    for(let i = 1; i <= totalPlayer; i++) {
+                        $("#icon-"+i).css("display","none");
+                        $("#iconm-"+i).css("display","none");
+                    }
+                    $("#icon-"+response["winner"]).css("display","block");
+                    $("#iconm-"+response["winner"]).css("display","block");
+                    if(response["ended"].includes('true')) {
+                        $('#exampleModal').modal('show');
+                    }
                 }
             });
         }
@@ -131,14 +140,24 @@
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Puntaje</th>
+                            <th scope="col">Ganando</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
-                                <td scope="row"><%= player[0]%></td>
-                                <td><%= player[1].getName%></td>
-                                <td id="score-<%= player[0]%>"><%= player[1].getScore%></td>
+                                <td scope="row">
+                                    <%= player[0]%>
+                                </td>
+                                <td id="name-<%= player[0]%>">
+                                    <%= player[1].getName%>
+                                </td>
+                                <td id="score-<%= player[0]%>">
+                                    <%= player[1].getScore%>
+                                </td>
+                                <td  id="icon-<%= player[0]%>" style="display:none;">
+                                    <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                </td>
                             </tr>
                         <% end %>
                     </tbody>
@@ -147,6 +166,48 @@
                     <div class="alert alert-success" role="alert" id="alertMessage" style="display: none;">
                         Enhorabuena
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Juego terminado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Puntaje</th>
+                                <th scope="col">Ganando</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% $game.getPlayers.each do |player| %>
+                                <tr>
+                                    <td>
+                                        <%= player[1].getName%>
+                                    </td>
+                                    <td id="scorem-<%= player[0]%>">
+                                        <%= player[1].getScore%>
+                                    </td>
+                                    <td  id="iconm-<%= player[0]%>" style="display:none;">
+                                        <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>">Reinciar Partida</a>
+                    <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
                 </div>
             </div>
         </div>

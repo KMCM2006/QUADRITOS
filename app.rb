@@ -28,11 +28,11 @@ class App < Sinatra::Base
     end
 
     get '/game' do
-        modality = params[:modality]
-        if(modality == "1")
-            numberPlayers = params[:numberPlayers]
-            numberPlayers = numberPlayers.to_i
-            $game = Game.new(7, 7, numberPlayers)
+        $modality = params[:modality]
+        if($modality == "1")
+            $numberPlayers = params[:numberPlayers]
+            $numberPlayers = $numberPlayers.to_i
+            $game = Game.new(7, 7, $numberPlayers)
             erb :game
         else
             redirect '/modality'
@@ -41,10 +41,14 @@ class App < Sinatra::Base
 
     get '/verify-square' do
         response = $game.getBoard.verifySquare(params[:positions])
+        winner = "0"
+        ended = ""
         if response.include? 'true'
             $game.incrementScoreOfPlayer(params[:currentTurn])
+            winner = $game.getWinner[0]
+            ended = $game.getBoard.endedTheGame
         end
-        return "{\"response\": \""+ response + "\"}"
+        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
     end
 
 end
