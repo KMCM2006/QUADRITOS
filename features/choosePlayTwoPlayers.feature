@@ -5,17 +5,21 @@ Feature: Elegir jugar entre 2 jugadores
 
     Scenario: logo del juego
         Given visito la pagina modalidad
+        When selecciono "dos" jugadores opcion 2
         Then deberia ver logo del juego
     
     Scenario: nombre del jugador
         Given visito la pagina modalidad
+        When selecciono "dos" jugadores opcion 2
         Then deberia ver el nombre del jugador "GoDiegoGo"
 
     Scenario: cantidad de jugadores 2
         Given estoy en la pagina modalidad
-        When selecciono "dos" jugadores opcion 1
+        When selecciono "dos" jugadores opcion 2
         Then se ve "2 jugadores" seleccionado
 
-    Scenario: ver boton de empezar la partida
-        Given visito la pagina modalidad
-        Then deberia ver el  boton "Empezar partida"
+    Scenario: ingresar nombres de jugadores
+        Given estoy en la pagina modalidad
+        When selecciono "dos" jugadores opcion 2
+        Then me pide que ingrese los nombres de los 2 jugadores "twoPlayersName"
+        
