@@ -42,11 +42,13 @@ class App < Sinatra::Base
     get '/verify-square' do
         response = $game.getBoard.verifySquare(params[:positions])
         winner = "0"
+        ended = ""
         if response.include? 'true'
             $game.incrementScoreOfPlayer(params[:currentTurn])
             winner = $game.getWinner[0]
+            ended = $game.getBoard.endedTheGame
         end
-        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\"}"
+        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
     end
 
 end

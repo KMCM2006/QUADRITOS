@@ -183,4 +183,18 @@ class Board
         return @columns
     end
 
+    def endedTheGame()
+        @horizontalLines.each do |line|
+            if(!line.isItVisible)
+                return false
+            end
+        end
+        @verticalLines.each do |line|
+            if(!line.isItVisible)
+                return false
+            end
+        end
+        return true
+    end
+
 end
