@@ -31,8 +31,7 @@
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
-                let resp = JSON.stringify(response);
-                 if(resp.includes('true')) {
+                if(response["response"].includes('true')) {
                     let score;
                     score = Number($("#score-"+tempTurn).text());
                     score++;
@@ -41,6 +40,10 @@
                     setTimeout(function(){
                         $('#alertMessage').css("display","none");
                     }, 2000);
+                    for(let i = 1; i <= totalPlayer; i++) {
+                        $("#icon-"+i).css("display","none");
+                    }
+                    $("#icon-"+response["winner"]).css("display","block");
                 }
             });
         }
@@ -131,14 +134,24 @@
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Puntaje</th>
+                            <th scope="col">Ganando</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
-                                <td scope="row"><%= player[0]%></td>
-                                <td><%= player[1].getName%></td>
-                                <td id="score-<%= player[0]%>"><%= player[1].getScore%></td>
+                                <td scope="row">
+                                    <%= player[0]%>
+                                </td>
+                                <td>
+                                    <%= player[1].getName%>
+                                </td>
+                                <td id="score-<%= player[0]%>">
+                                    <%= player[1].getScore%>
+                                </td>
+                                <td  id="icon-<%= player[0]%>" style="display:none;">
+                                    <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                </td>
                             </tr>
                         <% end %>
                     </tbody>
