@@ -38,3 +38,5 @@ Feature: Iniciar partida con varios jugadores desde la misma PC
     And se ve el puntaje de "Jugador 4" inicializado en 0
     And se ve la opcion de "Configuraciones"
     And se ve el tablero vacio
+
+      
