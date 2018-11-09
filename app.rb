@@ -31,8 +31,14 @@ class App < Sinatra::Base
         $modality = params[:modality]
         if($modality == "1")
             $numberPlayers = params[:numberPlayers]
+            $player1 = params[:name11]
+            $player2 = params[:name12]
+            $player3 = params[:name13]
+            $player4 = params[:name14]
+            $playersName = $player1 + "," + $player2 + "," + $player3 + "," + $player4
+            puts $playersName
             $numberPlayers = $numberPlayers.to_i
-            $game = Game.new(7, 7, $numberPlayers)
+            $game = Game.new(7, 7, $numberPlayers, $playersName)
             erb :game
         else
             redirect '/modality'

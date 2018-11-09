@@ -2,11 +2,12 @@ require './lib/board'
 require './lib/player'
 class Game
 
-    def initialize(rows, columns, numberPlayers)
+    def initialize(rows, columns, numberPlayers, playersName)
         @board = Board.new(rows, columns)
+        @playersName = playersName.split(',')
         @players = Array[]
         for number in (1..numberPlayers) do
-            @players.push([number, Player.new("Jugador "+number.to_s, 0)])
+            @players.push([number, Player.new(@playersName[number-1], 0)])
         end
     end
 
