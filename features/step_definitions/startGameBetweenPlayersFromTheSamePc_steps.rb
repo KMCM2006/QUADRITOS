@@ -1,5 +1,5 @@
 Given("visito la pagina del juego con {string} jugadores") do |players|
-    visit('/game?modality=1&numberPlayers='+players)
+    visit('/game?modality=1&numberPlayers='+players+'&name11=Jugador+1&name12=Jugador+2&name13=Jugador+3&name14=Jugador+4')
   end
 
   Then("se ve el nombre del {string}") do |player|
