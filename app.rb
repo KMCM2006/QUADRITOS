@@ -36,7 +36,6 @@ class App < Sinatra::Base
             $player3 = params[:name13]
             $player4 = params[:name14]
             $playersName = $player1 + "," + $player2 + "," + $player3 + "," + $player4
-            puts $playersName
             $numberPlayers = $numberPlayers.to_i
             $game = Game.new(7, 7, $numberPlayers, $playersName)
             erb :game

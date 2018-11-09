@@ -112,6 +112,12 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Configuraciones</a>
                 </li>
+                <li class="nav-item active">
+                    <a id="Reiniciar" type="button" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
+                </li>
+                <li class="nav-item active">
+                    <a id="Nueva" type="button" class="nav-link" href="/modality">Nueva Partida</a>
+                </li>
                 <li class="nav-item">
                     <div class="nav-link disabled">Bienvenido <%=@username%></div>
                 </li>
@@ -205,8 +211,8 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="modal-footer">/game?modality=1&numberPlayers=3&name11=hola&name12=mundo&name13=dude&name14=
-                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reinciar Partida</a>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
                     <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
                 </div>
             </div>
