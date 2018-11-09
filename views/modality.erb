@@ -22,21 +22,15 @@
         });
         $(document).ready(function(){
             $('#numberPlayers').on('change', function() {
-                if (this.value == 2){
-                    $("#twoPlayersName").show();
-                    $("#threePlayersName").hide();
-                    $("#fourPlayersName").hide();
+                $("#playersName").show();
+                if (this.value == 3){
+                    $("#name13").show();
+                    $("#name14").hide();
                 }
                 else{
-                    if (this.value == 3){
-                        $("#twoPlayersName").hide();
-                        $("#threePlayersName").show();
-                        $("#fourPlayersName").hide();
-                    }
-                    else{
-                        $("#twoPlayersName").hide();
-                        $("#threePlayersName").hide();
-                        $("#fourPlayersName").show();
+                    if (this.value == 4){
+                        $("#name13").show();
+                        $("#name14").show();
                     }
                 }
             });
@@ -112,29 +106,14 @@
             </div>
             <br/>
             <br/>
-            <div class="form-group" id="twoPlayersName" style="display:none">
+            <div class="form-group" id="playersName" style="display:none">
                 <div>
                     <h3>Ingresa los nombres de los jugadores</h3>
                 </div>
                 <input id="name11"  name="name11" type="text" />
                 <input id="name12"  name="name12" type="text" />
-            </div>
-            <div class="form-group" id="threePlayersName" style="display:none">
-                <div>
-                    <h3>Ingresa los nombres de los jugadores</h3>
-                </div>
-                <input id="name21"  name="name21" type="text" />
-                <input id="name22"  name="name22" type="text" />
-                <input id="name23"  name="name23" type="text" />
-            </div>
-            <div class="form-group" id="fourPlayersName" style="display:none">
-                <div>
-                    <h3>Ingresa los nombres de los jugadores</h3>
-                </div>
-                <input id="name31"  name="name31" type="text" />
-                <input id="name32"  name="name32" type="text" />
-                <input id="name33"  name="name33" type="text" />
-                <input id="name34"  name="name34" type="text" />
+                <input id="name13"  name="name13" type="text" style="display:none"/>
+                <input id="name14"  name="name14" type="text" style="display:none"/>
             </div>
             <div>
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
