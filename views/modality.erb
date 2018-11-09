@@ -10,10 +10,29 @@
     <script>
         $(document).ready(function(){
             $('#modalitySelector').on('change', function() {
-                if (this.value == 2)
-                    $("#numberPlayerSelector").hide();
-                else
+                if (this.value == 1){
                     $("#numberPlayerSelector").show();
+                    $("#difficultySelector").hide();
+                } 
+                else{
+                    $("#numberPlayerSelector").hide();
+                    $("#difficultySelector").show();
+                }
+            });
+        });
+        $(document).ready(function(){
+            $('#numberPlayers').on('change', function() {
+                $("#playersName").show();
+                if (this.value == 3){
+                    $("#name13").show();
+                    $("#name14").hide();
+                }
+                else{
+                    if (this.value == 4){
+                        $("#name13").show();
+                        $("#name14").show();
+                    }
+                }
             });
         });
     </script>
@@ -45,7 +64,7 @@
             </ul>
         </div>
         </nav>
-    <div class="container" style="text-align:center;">
+    <div class="container" style="text-align:center;" id="fatherOfTags">
         <form action="/game" method="get">
             <div>
                 <h3 class="display-3">Modalidades</h3>
@@ -56,22 +75,45 @@
             </div>
             <div class="form-group">
                 <select class="form-control form-control-lg" id="modalitySelector" name="modality">
+                    <option disabled selected value> -- selecciona una modalidad -- </option>
                     <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
-                    <option value="2" id="modalityPlayInDifferentComputer">Oponentes desde distinta PC</option>
-                    <!--<option value="3" id="modalityPlayWithComputer">Jugar contra la PC</option> -->
+                    <option value="2" id="modalityPlayWithComputer">Jugar contra la PC</option>
                 </select>
             </div>
             <br/>
             <br/>
-            <div class="form-group" id="numberPlayerSelector">
+            <div class="form-group" id="numberPlayerSelector" style="display:none">
                 <div>
                     <h3>Elige la cantidad de jugadores</h3>
                 </div>
                 <select class="form-control form-control-lg" id="numberPlayers" name="numberPlayers">
+                    <option disabled selected value> -- selecciona la cantidad de jugadores -- </option>
                     <option value="2">2 jugadores</option>
                     <option value="3">3 jugadores</option>
                     <option value="4">4 jugadores</option>
                 </select>
+            </div>
+            <div class="form-group" id="difficultySelector" style="display:none">
+                <div>
+                    <h3>Elige la dificultad de la PC</h3>
+                </div>
+                <select class="form-control form-control-lg" id="difficulty" name="difficulty">
+                    <option disabled selected value> -- selecciona la dificultad de la PC -- </option>
+                    <option value="2">Facil</option>
+                    <option value="3">Medio</option>
+                    <option value="4">Dificil</option>
+                </select>
+            </div>
+            <br/>
+            <br/>
+            <div class="form-group" id="playersName" style="display:none">
+                <div>
+                    <h3>Ingresa los nombres de los jugadores</h3>
+                </div>
+                <input id="name11"  name="name11" type="text" />
+                <input id="name12"  name="name12" type="text" />
+                <input id="name13"  name="name13" type="text" style="display:none"/>
+                <input id="name14"  name="name14" type="text" style="display:none"/>
             </div>
             <div>
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>

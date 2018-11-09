@@ -3,11 +3,7 @@ Given("estoy en la pagina modalidad") do
 end
   
 Then("se ve la opcion para elegir la cantidad de jugadores") do
-    expect(page).to have_selector('#numberPlayerSelector', visible: true)    
-end
-
-Then("deberia ver el  boton {string}") do |nombre|
-    expect(page).to have_content(nombre)
+    expect(page).to have_selector('#numberPlayerSelector', visible: false)    
 end
 
 When("selecciono modalidad {string} Opcion {int}") do |string, int|
