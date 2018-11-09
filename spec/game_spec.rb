@@ -3,7 +3,7 @@ require './lib/game'
 describe "Pruebas de la clase Game" do
 
     before :each do |single|
-        @game = Game.new(7, 7, 2, "Jugadores")
+        @game = Game.new(7, 7, 2, "Jugadores 1, Jugadores 2")
     end
 
     it "deberia crearse un tabler de '7' filas y '7' columnas" do
