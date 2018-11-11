@@ -1,0 +1,9 @@
+<ul>
+    <% @scores.each do |single| %>
+        <li>
+            <%= single.avatar%>
+            <%= single.name%>
+            <%= single.points%>
+        </li>
+    <% end %>
+</ul>
