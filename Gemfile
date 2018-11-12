@@ -10,6 +10,9 @@ gem "capybara"
 gem "rack"
 gem "nokogiri"
 gem "matts_tictactoe_core"
+gem "sinatra-activerecord"
+gem "pg"
+gem "rake"
 
 group :test, :development do
   gem "cucumber"
@@ -19,6 +22,7 @@ group :test, :development do
   gem "pry"
   gem "pry-nav"
   gem "simplecov"
+  gem "sqlite3"
 end
 
 group :development do

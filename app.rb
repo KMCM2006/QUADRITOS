@@ -1,12 +1,40 @@
 require './lib/game'
 require 'sinatra'
+require "sinatra/activerecord"
+
+configure :development do
+    set :database, {:adapter => "sqlite3", database: "quadritos.sqlite3"}
+end
+configure :production do
+    set :database, {:adapter => "postgresql", :host => "ec2-75-101-138-26.compute-1.amazonaws.com", :username => "lalqowuabtegfa", :password => "95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478", :database => "postgres://lalqowuabtegfa:95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478@ec2-75-101-138-26.compute-1.amazonaws.com:5432/d8g56bj6362n38"}
+end
+
+class User < ActiveRecord::Base
+end
+
+class Score < ActiveRecord::Base
+end 
 
 class App < Sinatra::Base
+    register Sinatra::ActiveRecordExtension
 
     $game
     @username
     @password
     @confirmPassword
+
+    get '/save' do
+        @score = Score.new
+        @score.avatar = "avatar"
+        @score.name = "baymax"
+        @score.points = "100"
+        @score.save()
+    end
+    
+    get '/list' do
+        @scores = Score.all
+        erb :scores
+    end
 
     get '/' do
         erb :welcome
