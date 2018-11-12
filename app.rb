@@ -6,7 +6,7 @@ configure :development do
     set :database, {:adapter => "sqlite3", database: "quadritos.sqlite3"}
 end
 configure :production do
-    set :database, {:adapter => "postgresql", :host => "ec2-23-23-245-89.compute-1.amazonaws.com", :username => "tyfxnytdtbxzhs", :password => "9834d2199e5107eb145e31b78ad1978236a7490701ff27013ea7c444df04baa7", :database => "postgres://tyfxnytdtbxzhs:9834d2199e5107eb145e31b78ad1978236a7490701ff27013ea7c444df04baa7@ec2-23-23-245-89.compute-1.amazonaws.com:5432/dfauncpbdno585"}
+    set :database, {:adapter => "postgresql", :host => "ec2-75-101-138-26.compute-1.amazonaws.com", :username => "lalqowuabtegfa", :password => "95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478", :database => "postgres://lalqowuabtegfa:95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478@ec2-75-101-138-26.compute-1.amazonaws.com:5432/d8g56bj6362n38"}
 end
 
 class User < ActiveRecord::Base
