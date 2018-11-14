@@ -37,9 +37,9 @@
                     score++;
                     $("#score-"+tempTurn).text(score+"");
                     $("#scorem-"+tempTurn).text(score+"");
-                    $('#alertMessage').css("display","block");
+                    $('#alertMessage').css("visibility","visible");
                     setTimeout(function(){
-                        $('#alertMessage').css("display","none");
+                        $('#alertMessage').css("visibility","hidden");
                     }, 2000);
                     for(let i = 1; i <= totalPlayer; i++) {
                         $("#icon-"+i).css("display","none");
@@ -169,7 +169,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <div class="alert alert-success" role="alert" id="alertMessage" style="display: none;">
+                    <div class="alert alert-success" role="alert" id="alertMessage" style="visibility:hidden;">
                         Enhorabuena
                     </div>
                 </div>
