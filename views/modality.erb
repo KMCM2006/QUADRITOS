@@ -9,33 +9,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function(){
-            $('#modalitySelector').on('change', function() {
-                if (this.value == 1){
-                    $("#numberPlayerSelector").show();
-                    $("#difficultySelector").hide();
-                } 
-                else{
-                    $("#numberPlayerSelector").hide();
-                    $("#difficultySelector").show();
+        function showDiv(elem){
+            if(elem.value == 1){
+                document.getElementById('numberPlayerSelector').style.visibility = "visible";
+            }else{
+                document.getElementById('numberPlayerSelector').style.visibility = "hidden";
+            }
+        }
+        function showDiv2(elem){
+            document.getElementById('playersName').style.visibility = "visible";
+            if(elem.value == 2){
+                document.getElementById('name13').style.visibility = "hidden";
+                document.getElementById('name14').style.visibility = "hidden";
+            }else{
+                if(elem.value == 3){
+                    document.getElementById('name13').style.visibility = "visible";
+                    document.getElementById('name14').style.visibility = "hidden";
+                }else{
+                    document.getElementById('name13').style.visibility = "visible";
+                    document.getElementById('name14').style.visibility = "visible";
                 }
-            });
-        });
-        $(document).ready(function(){
-            $('#numberPlayers').on('change', function() {
-                $("#playersName").show();
-                if (this.value == 3){
-                    $("#name13").show();
-                    $("#name14").hide();
-                }
-                else{
-                    if (this.value == 4){
-                        $("#name13").show();
-                        $("#name14").show();
-                    }
-                }
-            });
-        });
+            }
+        }
     </script>
 </head>
 <body>
@@ -75,7 +70,7 @@
                 <h3>Elige una modalidad para comenzar a jugar</h3>
             </div>
             <div class="form-group">
-                <select class="form-control form-control-lg" id="modalitySelector" name="modality">
+                <select class="form-control form-control-lg" id="modalitySelector" name="modality" onchange="showDiv(this)">
                     <option disabled selected value> -- selecciona una modalidad -- </option>
                     <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
                     <option value="2" id="modalityPlayWithComputer">Jugar contra la PC</option>
@@ -83,38 +78,30 @@
             </div>
             <br/>
             <br/>
-            <div class="form-group" id="numberPlayerSelector" style="display:none">
+            <div class="form-group" id="numberPlayerSelector" style="visibility: hidden;">
                 <div>
                     <h3>Elige la cantidad de jugadores</h3>
                 </div>
-                <select class="form-control form-control-lg" id="numberPlayers" name="numberPlayers">
+                <select class="form-control form-control-lg" id="numberPlayers" name="numberPlayers" onchange="showDiv2(this)">
                     <option disabled selected value> -- selecciona la cantidad de jugadores -- </option>
                     <option value="2">2 jugadores</option>
                     <option value="3">3 jugadores</option>
                     <option value="4">4 jugadores</option>
                 </select>
             </div>
-            <div class="form-group" id="difficultySelector" style="display:none">
-                <div>
-                    <h3>Elige la dificultad de la PC</h3>
-                </div>
-                <select class="form-control form-control-lg" id="difficulty" name="difficulty">
-                    <option disabled selected value> -- selecciona la dificultad de la PC -- </option>
-                    <option value="2">Facil</option>
-                    <option value="3">Medio</option>
-                    <option value="4">Dificil</option>
-                </select>
-            </div>
             <br/>
             <br/>
-            <div class="form-group" id="playersName" style="display:none">
+            <div class="form-group" id="playersName" name="playersName" style="visibility: hidden;">
                 <div>
                     <h3>Ingresa los nombres de los jugadores</h3>
                 </div>
-                <input id="name11"  name="name11" type="text" />
-                <input id="name12"  name="name12" type="text" />
-                <input id="name13"  name="name13" type="text" style="display:none"/>
-                <input id="name14"  name="name14" type="text" style="display:none"/>
+                <input id="name11"  name="name11" type="text" placeholder="Jugador 1"/>
+                <br/>
+                <input id="name12"  name="name12" type="text" placeholder="Jugador 2"/>
+                <br/>
+                <input id="name13"  name="name13" type="text" placeholder="Jugador 3" style="visibility: hidden;"/>
+                <br/>
+                <input id="name14"  name="name14" type="text" placeholder="Jugador 4" style="visibility: hidden;"/>
             </div>
             <div>
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
