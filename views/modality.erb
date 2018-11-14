@@ -14,10 +14,15 @@
                 document.getElementById('numberPlayerSelector').style.visibility = "visible";
             }else{
                 document.getElementById('numberPlayerSelector').style.visibility = "hidden";
+                document.getElementById('playersName').style.visibility = "hidden";
+                document.getElementById('buttonStartMatch').style.visibility = "hidden";
+                document.getElementById('name13').style.visibility = "hidden";
+                document.getElementById('name14').style.visibility = "hidden";
             }
         }
         function showDiv2(elem){
             document.getElementById('playersName').style.visibility = "visible";
+            document.getElementById('buttonStartMatch').style.visibility = "visible";
             if(elem.value == 2){
                 document.getElementById('name13').style.visibility = "hidden";
                 document.getElementById('name14').style.visibility = "hidden";
@@ -54,13 +59,13 @@
                         <a class="nav-link" href="/register">Registrarse</a>
                     </li>
                 <% end %>
-                <li class="nav-item disabled">
+                <li class="nav-item disabled" style="visibility:hidden;">
                     <div class="nav-link disabled">GoDiegoGo</div>
                 </li>
             </ul>
         </div>
         </nav>
-    <div class="container" style="text-align:center;" id="fatherOfTags">
+    <div class="container" style="text-align:center;">
         <form action="/game" method="get">
             <div>
                 <h3 class="display-3">Modalidades</h3>
@@ -103,7 +108,7 @@
                 <br/>
                 <input id="name14"  name="name14" type="text" placeholder="Jugador 4" style="visibility: hidden;"/>
             </div>
-            <div>
+            <div id="buttonStartMatch"  name="buttonStartMatch" style="visibility: hidden;">
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
             </div>
         </form>

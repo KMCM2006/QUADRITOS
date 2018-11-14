@@ -22,4 +22,5 @@ Feature: Elegir jugar entre 3 jugadores
         Given estoy en la pagina modalidad
         When selecciono "tres" jugadores opcion 3
         Then me pide que ingrese los nombres de los 3 jugadores "threePlayersName"
+        And deberia ver el boton "Empezar partida"
         
