@@ -22,4 +22,5 @@ Feature: Elegir jugar entre 2 jugadores
         Given estoy en la pagina modalidad
         When selecciono "dos" jugadores opcion 2
         Then me pide que ingrese los nombres de los 2 jugadores "twoPlayersName"
+        And deberia ver el boton "Empezar partida"
         

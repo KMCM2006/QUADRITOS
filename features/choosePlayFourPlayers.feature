@@ -22,3 +22,4 @@ Feature: Elegir jugar entre 4 jugadores
         Given estoy en la pagina modalidad
         When selecciono "cuatro" jugadores opcion 4
         Then me pide que ingrese los nombres de los 4 jugadores "fourPlayersName"
+        And deberia ver el boton "Empezar partida"
