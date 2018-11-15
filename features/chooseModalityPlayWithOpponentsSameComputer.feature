@@ -22,8 +22,3 @@ Feature: Elegir modalidad jugar contra oponentes desde la misma PC
         Given estoy en la pagina modalidad
         When selecciono modalidad "jugar contra oponentes desde la misma PC" Opcion 2
         Then se ve la opcion para elegir la cantidad de jugadores
-
-    Scenario: ver boton de empezar la partida
-        Given visito la pagina modalidad
-        When selecciono modalidad "jugar contra oponentes desde la misma PC" Opcion 2
-        Then deberia ver el  boton "Empezar partida"

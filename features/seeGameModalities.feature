@@ -18,7 +18,3 @@ Feature: Ver modalidades
     Scenario: opcion oponentes desde la misma PC
         Given visito la pagina modalidad
         Then deberia ver primera opcion "Oponentes desde la misma PC"
-
-    Scenario: jugar contra la PC
-        Given visito la pagina modalidad
-        Then deberia ver segunda opcion "Jugar contra la PC"
