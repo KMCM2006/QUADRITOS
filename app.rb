@@ -84,4 +84,7 @@ class App < Sinatra::Base
         return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
     end
 
+    get '/scores' do
+        erb :score
+    end
 end
