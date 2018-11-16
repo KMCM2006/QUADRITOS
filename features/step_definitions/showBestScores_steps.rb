@@ -3,13 +3,13 @@ Given("visito la pagina mejores puntajes") do
 end
   
 Then("deberia ver el nombre jugador") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_content("GoDiegoGo")
 end
   
 Then("deberia ver el enlace {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_content(string)
 end
   
 Then("deberia ver una tabla con el titulo {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_content(string)
 end
