@@ -36,6 +36,9 @@
                 }
             }
         }
+        function showGameRulesModal(){
+            $('#showGameRulesModal').modal('show');
+        }
     </script>
 </head>
 <body>
@@ -59,6 +62,9 @@
                         <a class="nav-link" href="/register">Registrarse</a>
                     </li>
                 <% end %>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="#" id="gameRulesLink" onclick="showGameRulesModal()">Ver reglas</a>
+                </li>
                 <li class="nav-item disabled" style="visibility:hidden;">
                     <div class="nav-link disabled">GoDiegoGo</div>
                 </li>
@@ -112,6 +118,31 @@
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
             </div>
         </form>
+    </div>
+    <div class="modal fade" id="showGameRulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showGameRulesModalLabel">Reglas del juego</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>1. En cada jugada, de forma alternada, 
+                    un jugador unirá dos puntos consecutivos horizontal o verticalmente.</p>
+                    <p>2. Las líneas diagonales no son permitidas en el juego.</p>
+                    <p>3. Cuando un jugador forma con estas líneas un cuadrado, gana un punto.</p>
+                    <p>4. Cuando un jugador forma con estas líneas un cuadrado se lo marca 
+                    con un color distintivo</p>
+                    <p>5. Después de formar un cuadrado deberá dibujar una línea más, cerrando todos los 
+                    cuadros que el tablero permita.</p>
+                    <p>6. El jugador que se haga con más cuadrados gana la partida.</p>
+                    <br/>
+                    <div style="text-align: center"><img src="Reglas.jpg"/></div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

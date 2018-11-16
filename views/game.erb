@@ -92,6 +92,10 @@
             $("#user-1").addClass('bg-primary');
         }
 
+        function showGameRulesModal(){
+            $('#showGameRulesModal').modal('show');
+        }
+
         window.onload=start;
     </script>
 
@@ -113,10 +117,13 @@
                     <a class="nav-link" href="#">Configuraciones</a>
                 </li>
                 <li class="nav-item active">
-                    <a id="Reiniciar" type="button" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
+                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
                 </li>
                 <li class="nav-item active">
-                    <a id="Nueva" type="button" class="nav-link" href="/modality">Nueva Partida</a>
+                    <a id="Nueva" class="nav-link" href="/modality">Nueva Partida</a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="#" id="gameRulesLink" onclick="showGameRulesModal()">Ver reglas</a>
                 </li>
                 <li class="nav-item">
                     <div class="nav-link disabled">Bienvenido <%=@username%></div>
@@ -214,6 +221,31 @@
                 <div class="modal-footer">
                     <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
                     <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="showGameRulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showGameRulesModalLabel">Reglas del juego</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>1. En cada jugada, de forma alternada, 
+                    un jugador unirá dos puntos consecutivos horizontal o verticalmente.</p>
+                    <p>2. Las líneas diagonales no son permitidas en el juego.</p>
+                    <p>3. Cuando un jugador forma con estas líneas un cuadrado, gana un punto.</p>
+                    <p>4. Cuando un jugador forma con estas líneas un cuadrado se lo marca 
+                    con un color distintivo</p>
+                    <p>5. Después de formar un cuadrado deberá dibujar una línea más, cerrando todos los 
+                    cuadros que el tablero permita.</p>
+                    <p>6. El jugador que se haga con más cuadrados gana la partida.</p>
+                    <br/>
+                    <div style="text-align: center"><img src="Reglas.jpg"/></div>
                 </div>
             </div>
         </div>
