@@ -1,9 +1,5 @@
 Given("visito la pagina mejores puntajes") do
-    visit('/bestScores')
-end
-
-Given("visito la pagina mejores puntajes") do
-    pending # Write code here that turns the phrase above into concrete actions
+    visit('/scores')
 end
   
 Then("deberia ver el nombre jugador") do
