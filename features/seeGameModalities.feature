@@ -18,3 +18,7 @@ Feature: Ver modalidades
     Scenario: opcion oponentes desde la misma PC
         Given visito la pagina modalidad
         Then deberia ver primera opcion "Oponentes desde la misma PC"
+
+    Scenario: reglas
+        Given visito la pagina modalidad
+        Then deberia ver una opcion que muestre "Ver reglas"
