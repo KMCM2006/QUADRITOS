@@ -17,10 +17,8 @@ class Board
         @lineId = 0
         for i in (1..@rows) do
             for j in (1..@columns-1) do
-                #@lineId = @lineId + 1
-                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i, @lineId))
-                #@lineId = @lineId + 1
-                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval), @lineId))
+                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i))
+                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval)))
             end
         end
     end
@@ -28,8 +26,8 @@ class Board
     def verifySquare(line)
         result = ''
         values = line.split('-')
-        orientation = values[0] # H
-        positions =values[1].split('_')# 30 10 30 30
+        orientation = values[0]
+        positions =values[1].split('_')
         udpateLine(orientation, positions)
         if(orientation == 'H')
             result = result + verifiyHorizontalLineTop(positions).to_s
