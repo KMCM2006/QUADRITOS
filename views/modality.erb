@@ -18,6 +18,8 @@
                 document.getElementById('buttonStartMatch').style.visibility = "hidden";
                 document.getElementById('name13').style.visibility = "hidden";
                 document.getElementById('name14').style.visibility = "hidden";
+                document.getElementById('avatar13').style.visibility = "hidden";
+                document.getElementById('avatar14').style.visibility = "hidden";
             }
         }
         function showDiv2(elem){
@@ -26,13 +28,19 @@
             if(elem.value == 2){
                 document.getElementById('name13').style.visibility = "hidden";
                 document.getElementById('name14').style.visibility = "hidden";
+                document.getElementById('avatar13').style.visibility = "hidden";
+                document.getElementById('avatar14').style.visibility = "hidden";
             }else{
                 if(elem.value == 3){
                     document.getElementById('name13').style.visibility = "visible";
                     document.getElementById('name14').style.visibility = "hidden";
+                    document.getElementById('avatar13').style.visibility = "visible";
+                    document.getElementById('avatar14').style.visibility = "hidden";
                 }else{
                     document.getElementById('name13').style.visibility = "visible";
                     document.getElementById('name14').style.visibility = "visible";
+                    document.getElementById('avatar13').style.visibility = "visible";
+                    document.getElementById('avatar14').style.visibility = "visible";
                 }
             }
         }
@@ -71,53 +79,94 @@
             </ul>
         </div>
         </nav>
-    <div class="container" style="text-align:center;">
-        <form action="/game" method="get">
-            <div>
-                <h3 class="display-3">Modalidades</h3>
-            </div>
-            <br/>
-            <div>
-                <h3>Elige una modalidad para comenzar a jugar</h3>
-            </div>
-            <div class="form-group">
-                <select class="form-control form-control-lg" id="modalitySelector" name="modality" onchange="showDiv(this)">
-                    <option disabled selected value> -- selecciona una modalidad -- </option>
-                    <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
-                    <option value="2" id="modalityPlayWithComputer">Jugar contra la PC</option>
-                </select>
-            </div>
-            <br/>
-            <br/>
-            <div class="form-group" id="numberPlayerSelector" style="visibility: hidden;">
+        <div class="container" style="text-align:center;">
+            <form action="/game" method="get">
                 <div>
-                    <h3>Elige la cantidad de jugadores</h3>
+                    <h3 class="display-3">Modalidades</h3>
                 </div>
-                <select class="form-control form-control-lg" id="numberPlayers" name="numberPlayers" onchange="showDiv2(this)">
-                    <option disabled selected value> -- selecciona la cantidad de jugadores -- </option>
-                    <option value="2">2 jugadores</option>
-                    <option value="3">3 jugadores</option>
-                    <option value="4">4 jugadores</option>
-                </select>
-            </div>
-            <br/>
-            <br/>
-            <div class="form-group" id="playersName" name="playersName" style="visibility: hidden;">
+                <br/>
                 <div>
-                    <h3>Ingresa los nombres de los jugadores</h3>
+                    <h3>Elige una modalidad para comenzar a jugar</h3>
                 </div>
-                <input id="name11"  name="name11" type="text" placeholder="Jugador 1"/>
+                <div class="form-group">
+                    <select class="form-control form-control-lg" id="modalitySelector" name="modality" onchange="showDiv(this)">
+                        <option disabled selected value> -- selecciona una modalidad -- </option>
+                        <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
+                        <option value="2" id="modalityPlayWithComputer">Jugar contra la PC</option>
+                    </select>
+                </div>
                 <br/>
-                <input id="name12"  name="name12" type="text" placeholder="Jugador 2"/>
                 <br/>
-                <input id="name13"  name="name13" type="text" placeholder="Jugador 3" style="visibility: hidden;"/>
-                <br/>
-                <input id="name14"  name="name14" type="text" placeholder="Jugador 4" style="visibility: hidden;"/>
-            </div>
-            <div id="buttonStartMatch"  name="buttonStartMatch" style="visibility: hidden;">
-                <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
-            </div>
-        </form>
+                <div class="row">
+                    <div class="col-md-2">
+                        <h3>Avatar</h3>
+                        <img src="avatar1.jpg" height="40%" width="40%">
+                        <img src="avatar2.jpg" height="40%" width="40%">
+                        <br/>Avatar 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avatar 2
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group" id="numberPlayerSelector" style="visibility: hidden;">
+                            <div>
+                                <h3>Elige la cantidad de jugadores</h3>
+                            </div>
+                            <select class="form-control form-control-lg" id="numberPlayers" name="numberPlayers" onchange="showDiv2(this)">
+                                <option disabled selected value> -- selecciona la cantidad de jugadores -- </option>
+                                <option value="2">2 jugadores</option>
+                                <option value="3">3 jugadores</option>
+                                <option value="4">4 jugadores</option>
+                            </select>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="form-group" id="playersName" name="playersName" style="visibility: hidden;">
+                            <div>
+                                <h3>Ingresa los nombres de los jugadores</h3>
+                            </div>
+                            <input id="name11"  name="name11" type="text" placeholder="Jugador 1"/>
+                            <select class="form-control-sm" id="avatar11" name="avatar11">
+                                <option value="avatar1.jpg">Avatar 1</option>
+                                <option value="avatar2.jpg">Avatar 2</option>
+                                <option value="avatar3.jpg">Avatar 3</option>
+                                <option value="avatar4.jpg">Avatar 4</option>
+                            </select>
+                            <br/>
+                            <input id="name12"  name="name12" type="text" placeholder="Jugador 2"/>
+                            <select class="form-control-sm" id="avatar12" name="avatar12">
+                                <option value="avatar1.jpg">Avatar 1</option>
+                                <option value="avatar2.jpg">Avatar 2</option>
+                                <option value="avatar3.jpg">Avatar 3</option>
+                                <option value="avatar4.jpg">Avatar 4</option>
+                            </select>
+                            <br/>
+                            <input id="name13"  name="name13" type="text" placeholder="Jugador 3" style="visibility: hidden;"/>
+                            <select class="form-control-sm" id="avatar13" name="avatar13" style="visibility: hidden;">
+                                <option value="avatar1.jpg">Avatar 1</option>
+                                <option value="avatar2.jpg">Avatar 2</option>
+                                <option value="avatar3.jpg">Avatar 3</option>
+                                <option value="avatar4.jpg">Avatar 4</option>
+                            </select>
+                            <br/>
+                            <input id="name14"  name="name14" type="text" placeholder="Jugador 4" style="visibility: hidden;"/>
+                            <select class="form-control-sm" id="avatar14" name="avatar14" style="visibility: hidden;">
+                                <option value="avatar1.jpg">Avatar 1</option>
+                                <option value="avatar2.jpg">Avatar 2</option>
+                                <option value="avatar3.jpg">Avatar 3</option>
+                                <option value="avatar4.jpg">Avatar 4</option>
+                            </select>
+                        </div>
+                        <div id="buttonStartMatch"  name="buttonStartMatch" style="visibility: hidden;">
+                            <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h3>Avatar</h3>
+                        <img src="avatar3.jpg" height="40%" width="40%">
+                        <img src="avatar4.jpg" height="40%" width="40%">
+                        <br/>Avatar 3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Avatar 4
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="modal fade" id="showGameRulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
