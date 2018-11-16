@@ -3,7 +3,7 @@ Given("estoy en la pagina de jugar") do
 end
 
   When("presiono el boton {string}") do |string|
-    find('#'+string).click
+    find(:xpath, '//*[@id="'+string+'"]').click
   end
 
   Then("mi puntaje deberia estar en {int}") do |score|
