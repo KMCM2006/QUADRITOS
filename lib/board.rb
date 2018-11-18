@@ -17,10 +17,8 @@ class Board
         @lineId = 0
         for i in (1..@rows) do
             for j in (1..@columns-1) do
-                @lineId = @lineId + 1
-                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i, @lineId))
-                @lineId = @lineId + 1
-                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval), @lineId))
+                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i))
+                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval)))
             end
         end
     end
