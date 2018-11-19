@@ -196,8 +196,27 @@ class Board
     end
 
     def getPositionsOfSquare(positions, options)
-        puts positions
-        puts options
+        values = positions.split('-')
+        orientation = values[0]
+        positions = values[1]
+        options = options.split('_')
+        options[0] = options[0].split('-')
+        options[1] = options[1].split('-')
+        if orientation == 'H'
+            if options[0][0] == 'HT' && options[0][1] == 'true'
+                puts positions
+            end
+            if options[1][0] == 'HB' && options[1][1] == 'true'
+                puts positions
+            end
+        else
+            if options[0][0] == 'VR' && options[0][1] == 'true'
+                puts positions
+            end
+            if options[1][0] == 'VL' && options[1][1] == 'true'
+                puts positions
+            end
+        end
     end
 
 end
