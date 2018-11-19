@@ -77,6 +77,7 @@
     <div class="container" style="text-align:center;">
         <form action="/game" method="get">
             <div>
+             <br/>
                 <h3 class="display-3">Modalidades</h3>
             </div>
             <br/>
@@ -90,7 +91,6 @@
                 </select>
             </div>
             <br/>
-            <br/>
             <div class="form-group" id="numberPlayerSelector" style="visibility: hidden;">
                 <div>
                     <h3>Elige la cantidad de jugadores</h3>
@@ -103,7 +103,6 @@
                 </select>
             </div>
             <br/>
-            <br/>
             <div class="form-group" id="playersName" name="playersName" style="visibility: hidden;">
                 <div>
                     <h3>Ingresa los nombres de los jugadores</h3>
@@ -115,7 +114,19 @@
                 <input id="name13"  name="name13" type="text" placeholder="Jugador 3" style="visibility: hidden;"/>
                 <br/>
                 <input id="name14"  name="name14" type="text" placeholder="Jugador 4" style="visibility: hidden;"/>
+                    <div class="form-group">
+                    <div>
+                        <h3>Elige el tamaho del tablero</h3>
+                    </div>
+                    <select class="form-control form-control-lg" id="numberBoardSize" name="numberBoardSize" onchange="showDiv2(this)">
+                        <option disabled selected value> -- selecciona el tamaho del tablero -- </option>
+                        <option value="2">7x7</option>
+                        <option value="3">10x10</option>
+                        <option value="4">15x15</option>
+                    </select>
+                </div>
             </div>
+             <br/>
             <div id="buttonStartMatch"  name="buttonStartMatch" style="visibility: hidden;">
                 <button type="submit" class="btn btn-warning btn-lg" style="background:rgb(255,83,64);border:rgb(255,83,64)">Empezar partida</button>
             </div>

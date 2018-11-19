@@ -1,7 +1,11 @@
 Given("estoy en la pagina modalidad") do
     visit('/modality')
 end
-  
+
+#Then("se ve la opcion para elegir tamaho del tablero") do
+ #   expect(page).to have_selector('#numberBoard', visible: false) 
+ # end
+
 Then("se ve la opcion para elegir la cantidad de jugadores") do
     expect(page).to have_selector('#numberPlayerSelector', visible: false)    
 end
