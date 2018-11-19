@@ -20,6 +20,10 @@ class Game
         return @players
     end
 
+    def getAvatars
+        return @avatars
+    end
+
     def incrementScoreOfPlayer(currentTurn)
         currentTurn = currentTurn.to_i
         @players.each do |number, player|
