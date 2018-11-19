@@ -39,4 +39,13 @@ class Game
         end
     end
 
+    def getAvatarOfUser(current)
+        current = current.to_i
+        @players.each do |number, player|
+            if number == current
+                return player.getAvatar
+            end
+        end
+    end
+
 end
