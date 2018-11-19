@@ -8,7 +8,7 @@ class Game
         @avatars = avatars.split(',')
         @players = Array[]
         for number in (1..numberPlayers) do
-            @players.push([number, Player.new(@playersName[number-1], @avatars[number-1], 0)])
+            @players.push([number, Player.new(@playersName[number-1], 0, @avatars[number-1])])
         end
     end
 
