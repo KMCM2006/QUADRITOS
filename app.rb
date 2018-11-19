@@ -30,7 +30,7 @@ class App < Sinatra::Base
         @score.points = "100"
         @score.save()
     end
-    
+
     get '/list' do
         @scores = Score.all
         erb :scores
@@ -44,7 +44,7 @@ class App < Sinatra::Base
         @username = params[:user]
         @password = params[:password]
         @confirmPassword = params[:confirmPassword]
-        if(@password != @confirmPassword) 
+        if(@password != @confirmPassword)
             redirect '/register'
         else
             erb :modality
@@ -85,8 +85,10 @@ class App < Sinatra::Base
             $game.incrementScoreOfPlayer(params[:currentTurn])
             winner = $game.getWinner[0]
             ended = $game.getBoard.endedTheGame
+            position = $game.getBoard.getPositionsOfSquare(params[:positions], response)
+            avatar = $game.getAvatarOfUser(params[:currentTurn])
         end
-        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
+        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\", \"position\": \""+ position.to_s + "\", \"avatar\": \""+ avatar.to_s + "\"}"
     end
 
     get '/scores' do

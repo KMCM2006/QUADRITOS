@@ -32,6 +32,17 @@
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response["response"].includes('true')) {
+                    let position = response['position']
+                    position = position.split('-');
+                    let image = document.createElementNS('http://www.w3.org/2000/svg','image');
+                    image.setAttributeNS(null, 'height', '50');
+                    image.setAttributeNS(null, 'width', '50');
+                    image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', response['avatar']);
+                    image.setAttributeNS(null, 'y', position[0]+"");
+                    image.setAttributeNS(null, 'x', position[1]+"");
+                    image.setAttributeNS(null, 'visibility', 'visible');
+                    let board = document.getElementById('board');
+                    board.append(image);
                     let score;
                     score = Number($("#score-"+tempTurn).text());
                     score++;
@@ -134,7 +145,7 @@
     <div class="container main-game">
         <div class="row">
             <div class="col-sm">
-                <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
+                <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" id="board">
                     <% $game.getBoard.getHorizontalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
@@ -160,7 +171,7 @@
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row">
-                                    <%= player[0]%>
+                                    <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
                                 </td>
                                 <td id="name-<%= player[0]%>">
                                     <%= player[1].getName%>
@@ -201,6 +212,7 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
+                                <th scope="col">Avatar<th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Puntaje</th>
                                 <th scope="col">Ganador</th>
@@ -209,6 +221,9 @@
                         <tbody>
                             <% $game.getPlayers.each do |player| %>
                                 <tr>
+                                    <td>
+                                        <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    </td>
                                     <td>
                                         <%= player[1].getName%>
                                     </td>

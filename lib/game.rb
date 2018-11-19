@@ -8,7 +8,7 @@ class Game
         @avatars = avatars.split(',')
         @players = Array[]
         for number in (1..numberPlayers) do
-            @players.push([number, Player.new(@playersName[number-1], 0), @avatars[number-1]])
+            @players.push([number, Player.new(@playersName[number-1], 0, @avatars[number-1])])
         end
     end
 
@@ -18,6 +18,10 @@ class Game
 
     def getPlayers
         return @players
+    end
+
+    def getAvatars
+        return @avatars
     end
 
     def incrementScoreOfPlayer(currentTurn)
@@ -32,6 +36,15 @@ class Game
     def getWinner()
         @players.max_by do |number, player|
             player.getScore
+        end
+    end
+
+    def getAvatarOfUser(current)
+        current = current.to_i
+        @players.each do |number, player|
+            if number == current
+                return player.getAvatar
+            end
         end
     end
 

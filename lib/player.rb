@@ -1,7 +1,8 @@
 class Player
-    def initialize(name, score)
+    def initialize(name, score, avatar)
         @name = name
         @score = score
+        @avatar = avatar
     end
 
     def getName()
@@ -10,6 +11,10 @@ class Player
 
     def getScore()
         return @score
+    end
+
+    def getAvatar()
+        return @avatar
     end
 
     def incrementScore()
