@@ -85,6 +85,7 @@ class App < Sinatra::Base
             $game.incrementScoreOfPlayer(params[:currentTurn])
             winner = $game.getWinner[0]
             ended = $game.getBoard.endedTheGame
+            position = $game.getBoard.getPositionsOfSquare(params[:positions], response)
         end
         return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
     end

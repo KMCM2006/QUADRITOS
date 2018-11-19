@@ -30,11 +30,11 @@ class Board
         positions =values[1].split('_')
         udpateLine(orientation, positions)
         if(orientation == 'H')
-            result = result + verifiyHorizontalLineTop(positions).to_s
-            result = result + verifiyHorizontalLineBotton(positions).to_s
+            result = result + "HT-" + verifiyHorizontalLineTop(positions).to_s + "_"
+            result = result + "HB-" + verifiyHorizontalLineBotton(positions).to_s + "_"
         else
-            result = result + verifyVerticalLineRight(positions).to_s
-            result = result + verifyVerticalLineLeft(positions).to_s
+            result = result + "VR-" + verifyVerticalLineRight(positions).to_s + "_"
+            result = result + "VL-" + verifyVerticalLineLeft(positions).to_s + "_"
         end
         return result
     end
@@ -193,6 +193,11 @@ class Board
             end
         end
         return true
+    end
+
+    def getPositionsOfSquare(positions, options)
+        puts positions
+        puts options
     end
 
 end

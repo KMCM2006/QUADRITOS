@@ -32,6 +32,7 @@
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response["response"].includes('true')) {
+                    
                     let score;
                     score = Number($("#score-"+tempTurn).text());
                     score++;
@@ -201,6 +202,7 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
+                                <th scope="col">Avatar<th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Puntaje</th>
                                 <th scope="col">Ganador</th>
@@ -209,6 +211,9 @@
                         <tbody>
                             <% $game.getPlayers.each do |player| %>
                                 <tr>
+                                    <td>
+                                        <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    </td>
                                     <td>
                                         <%= player[1].getName%>
                                     </td>
