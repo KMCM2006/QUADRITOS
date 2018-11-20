@@ -55,6 +55,10 @@ class App < Sinatra::Base
         erb :register
     end
 
+    get '/logIn' do
+        erb :logIn
+    end
+
     get '/game' do
         $modality = params[:modality]
         if($modality == "1")
