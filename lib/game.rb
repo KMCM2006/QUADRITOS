@@ -2,12 +2,13 @@ require './lib/board'
 require './lib/player'
 class Game
 
-    def initialize(rows, columns, numberPlayers, playersName)
+    def initialize(rows, columns, numberPlayers, playersName, avatars)
         @board = Board.new(rows, columns)
         @playersName = playersName.split(',')
+        @avatars = avatars.split(',')
         @players = Array[]
         for number in (1..numberPlayers) do
-            @players.push([number, Player.new(@playersName[number-1], 0)])
+            @players.push([number, Player.new(@playersName[number-1], 0, @avatars[number-1])])
         end
     end
 
@@ -17,6 +18,10 @@ class Game
 
     def getPlayers
         return @players
+    end
+
+    def getAvatars
+        return @avatars
     end
 
     def incrementScoreOfPlayer(currentTurn)
@@ -31,6 +36,15 @@ class Game
     def getWinner()
         @players.max_by do |number, player|
             player.getScore
+        end
+    end
+
+    def getAvatarOfUser(current)
+        current = current.to_i
+        @players.each do |number, player|
+            if number == current
+                return player.getAvatar
+            end
         end
     end
 
