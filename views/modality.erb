@@ -12,8 +12,10 @@
         function showDiv(elem){
             if(elem.value == 1){
                 document.getElementById('numberPlayerSelector').style.visibility = "visible";
+                document.getElementById('numberBoardSize').style.visibility = "visible";
             }else{
                 document.getElementById('numberPlayerSelector').style.visibility = "hidden";
+                document.getElementById('numberBoardSize').style.visibility = "visible";
                 document.getElementById('playersName').style.visibility = "hidden";
                 document.getElementById('buttonStartMatch').style.visibility = "hidden";
                 document.getElementById('name13').style.visibility = "hidden";
@@ -95,7 +97,6 @@
                     <select class="form-control form-control-lg" id="modalitySelector" name="modality" onchange="showDiv(this)">
                         <option disabled selected value> -- selecciona una modalidad -- </option>
                         <option value="1" id="modalityPlayInSameComputer">Oponentes desde la misma PC</option>
-                        <option value="2" id="modalityPlayWithComputer">Jugar contra la PC</option>
                     </select>
                 </div>
                 <br/>
@@ -118,9 +119,17 @@
                                 <option value="3">3 jugadores</option>
                                 <option value="4">4 jugadores</option>
                             </select>
+                            <br/>
+                            <div>
+                                <h3>Elige el tamaho del tablero</h3>
+                            </div>
+                            <select class="form-control form-control-lg" id="numberBoardSize" name="numberBoardSize">
+                                <option disabled selected value> -- selecciona el tamaho del tablero -- </option>
+                                <option value="5">5x5</option>
+                                <option value="7">7x7</option>
+                                <option value="9">9x9</option>
+                            </select>
                         </div>
-                        <br/>
-                        <br/>
                         <div class="form-group" id="playersName" name="playersName" style="visibility: hidden;">
                             <div>
                                 <h3>Ingresa los nombres de los jugadores</h3>
