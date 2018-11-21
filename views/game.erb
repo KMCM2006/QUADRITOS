@@ -32,14 +32,25 @@
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response["response"].includes('true')) {
+                    let position = response['position']
+                    position = position.split('-');
+                    let image = document.createElementNS('http://www.w3.org/2000/svg','image');
+                    image.setAttributeNS(null, 'height', '50');
+                    image.setAttributeNS(null, 'width', '50');
+                    image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', response['avatar']);
+                    image.setAttributeNS(null, 'y', position[0]+"");
+                    image.setAttributeNS(null, 'x', position[1]+"");
+                    image.setAttributeNS(null, 'visibility', 'visible');
+                    let board = document.getElementById('board');
+                    board.append(image);
                     let score;
                     score = Number($("#score-"+tempTurn).text());
                     score++;
                     $("#score-"+tempTurn).text(score+"");
                     $("#scorem-"+tempTurn).text(score+"");
-                    $('#alertMessage').css("display","block");
+                    $('#alertMessage').css("visibility","visible");
                     setTimeout(function(){
-                        $('#alertMessage').css("display","none");
+                        $('#alertMessage').css("visibility","hidden");
                     }, 2000);
                     for(let i = 1; i <= totalPlayer; i++) {
                         $("#icon-"+i).css("display","none");
@@ -117,7 +128,7 @@
                     <a class="nav-link" href="#">Configuraciones</a>
                 </li>
                 <li class="nav-item active">
-                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
+                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&avatar11=<%$avatar1%>&name12=<%=$player2%>&avatar12=<%$avatar2%>&name13=<%=$player3%>&avatar13=<%$avatar3%>&name14=<%=$player4%>&avatar14=<%$avatar4%>">Reiniciar Partida</a>
                 </li>
                 <li class="nav-item active">
                     <a id="Nueva" class="nav-link" href="/modality">Nueva Partida</a>
@@ -134,7 +145,7 @@
     <div class="container main-game">
         <div class="row">
             <div class="col-sm">
-                <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet">
+                <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" id="board">
                     <% $game.getBoard.getHorizontalLines.each do |line| %>
                         <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
                     <% end %>
@@ -160,7 +171,7 @@
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row">
-                                    <%= player[0]%>
+                                    <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
                                 </td>
                                 <td id="name-<%= player[0]%>">
                                     <%= player[1].getName%>
@@ -181,7 +192,7 @@
                     </iframe>
                 </div>
                 <div>
-                    <div class="alert alert-success" role="alert" id="alertMessage" style="display: none;">
+                    <div class="alert alert-success" role="alert" id="alertMessage" style="visibility: hidden;">
                         Enhorabuena
                     </div>
                 </div>
@@ -201,14 +212,18 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
+                                <th scope="col">Avatar<th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Puntaje</th>
-                                <th scope="col">Ganando</th>
+                                <th scope="col">Ganador</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% $game.getPlayers.each do |player| %>
                                 <tr>
+                                    <td>
+                                        <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    </td>
                                     <td>
                                         <%= player[1].getName%>
                                     </td>
@@ -224,7 +239,7 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&name12=<%=$player2%>&name13=<%=$player3%>&name14=<%=$player4%>">Reiniciar Partida</a>
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberPlayers%>&name11=<%=$player1%>&avatar11=<%$avatar1%>&name12=<%=$player2%>&avatar12=<%$avatar2%>&name13=<%=$player3%>&avatar13=<%$avatar3%>&name14=<%=$player4%>&avatar14=<%$avatar4%>">Reiniciar Partida</a>
                     <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
                 </div>
             </div>
