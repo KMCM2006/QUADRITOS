@@ -15,10 +15,6 @@ Given("visito la pagina del juego con {string} jugadores") do |players|
     expect(page).to have_content(score)
   end
 
-  Then("se ve la opcion de {string}") do |settings|
-    expect(page).to have_content(settings)
-  end
-
   Then("se ve el tablero vacio") do
     expect(page).to have_xpath('/html/body/div/div');
   end
