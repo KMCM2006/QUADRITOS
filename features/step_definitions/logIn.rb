@@ -1,6 +1,15 @@
-Given("visito la pagina inicia sesion") do
-    visit('/logIn')
-  end
-  Then("deberia mostrar el logo del juego en la barra de navegacion") do
-    expect(page).to have_xpath('/html/body/nav/div[1]/img')
-  end
+When("selecciono la opcion de {string}") do |string|
+  page.find("#iniciarSesion").click
+end
+
+Then("deberia mostrarme la pagina de {string}") do |string|
+  expect(page.find("#" + string).text).to eq "Iniciar Sesion"
+end
+
+Then("ingrese el nombre {string} en el campo {string}") do |string, string2|
+  fill_in string2, with: string
+end
+
+Then("ingreso el contraseña {string} en el campo {string}") do |string, string2|
+  fill_in string2, with: string
+end
