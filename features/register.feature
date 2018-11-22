@@ -4,6 +4,9 @@ Feature: Registrarse
     Para poder acceder a ella.
 
     Scenario: Registrarse con los datos minimos
-        Given visito la pagina registrarse
-        Then deberia ver el logo del juego en la barra de navegacion.
-        And deberia mostrar el boton "registrarse"
+        Given visito la pagina principal
+        When selecciono la opcion de Registrarse
+        Then deberia mostrarme el mensaje "Registrarse" en la pagina de "register"
+        And ingrese el nombre "Lupita" en el campo "user"
+        And ingreso la contraseña "123" en el campo "password"
+        And ingreso la confrimarcion de contraseña "123" en el campo "confirmPassword"
