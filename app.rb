@@ -71,6 +71,21 @@ class App < Sinatra::Base
         end
     end
 
+    get '/find-user' do
+        $name = params[:user]
+        $password = params[:password]
+        $currentUser = User.find_by(name: $name)
+        if $currentUser != nil
+            if $currentUser.password == $password
+                redirect '/modality'
+            else
+                redirect '/logIn'
+            end
+        else
+            redirect '/register'
+        end
+    end
+
     get '/logIn' do
         erb :logIn
     end
