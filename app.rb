@@ -96,4 +96,8 @@ class App < Sinatra::Base
     get '/scores' do
         erb :score
     end
+
+    get '/edit' do
+        
+    end
 end

@@ -1,5 +1,5 @@
 Given("visito la pagina editar datos") do
-    pending # Write code here that turns the phrase above into concrete actions
+    visit('/edit')
 end
   
 Then("deberia ver el titulo {string}") do |string|
