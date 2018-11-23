@@ -15,7 +15,7 @@ Feature: Editar datos de usuario
     Scenario: Ingreso nuevo nombre
         Given estoy en la pagina editar datos
         When ingreso mi nuevo nombre "nuevoNombre"
-        Then deberia ver mi nombre en el campo "nuevoNombre"
+        Then deberia ver mi nuevo nombre "nuevoNombre" en el campo nombre
 
     Scenario: Ingreso nuevo nombre y nueva contrasena
         Given estoy en la pagina editar datos

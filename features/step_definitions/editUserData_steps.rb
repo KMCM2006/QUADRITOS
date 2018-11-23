@@ -22,20 +22,20 @@ Given("estoy en la pagina editar datos") do
     visit('/edit')
 end
   
-When("ingreso mi nuevo nombre {string}") do |string|
-    fill_in 'user', with: string
-end
-  
 Then("deberia ver mi nombre en el campo {string}") do |string|
     expect(find_field('user').value).to eq string
 end
   
+When("ingreso mi nuevo nombre {string}") do |string|
+    fill_in 'user', with: string
+end
+
 When("ingreso mi contrasena {string}") do |string|
     pending # Write code here that turns the phrase above into concrete actions
 end
   
 Then("deberia ver mi nuevo nombre {string} en el campo nombre") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    fill_in 'user', with: string
 end
   
 Then("deberia ver mi nueva contrasena {string} en el campo contrasena") do |string|
