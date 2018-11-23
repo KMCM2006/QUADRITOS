@@ -85,6 +85,7 @@ class App < Sinatra::Base
     end
 
     get '/scores' do
+        @scores = Score.all
         erb :score
     end
 end

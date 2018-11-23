@@ -50,24 +50,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <th scope="row">1</th>
-                <td>Avatar1</td>
-                <td>Kevin</td>
-                <td>25</td>
-                </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Avatar2</td>
-                <td>Maye</td>
-                <td>23</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Avatar3</td>
-                <td>Vicchor</td>
-                <td>22</td>
-                </tr>
+                <% @scores.each do |single| %>
+                    <tr>
+                        <td>#</td>
+                        <td><%= single.avatar%></td>
+                        <td><%= single.name%></td>
+                        <td><%= single.points%></td>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
     </div>
