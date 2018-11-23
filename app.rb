@@ -98,6 +98,6 @@ class App < Sinatra::Base
     end
 
     get '/edit' do
-        
+        erb :edit
     end
 end

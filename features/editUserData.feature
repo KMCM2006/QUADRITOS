@@ -14,32 +14,32 @@ Feature: Editar datos de usuario
 
     Scenario: Ingreso nuevo nombre
         Given estoy en la pagina editar datos
-        When ingreso mi nuevo nombre
-        Then deberia ver mi nombre en el campo "nombre"
+        When ingreso mi nuevo nombre "nuevoNombre"
+        Then deberia ver mi nombre en el campo "nuevoNombre"
 
     Scenario: Ingreso nuevo nombre y nueva contrasena
         Given estoy en la pagina editar datos
-        When ingreso mi nuevo nombre
-        And ingreso mi contrasena
-        Then deberia ver mi nuevo nombre "nombre" en el campo nombre
-        And deberia ver mi nueva contrasena "contrasena" en el campo contrasena
+        When ingreso mi nuevo nombre "nuevoNombre"
+        And ingreso mi contrasena "nuevaContrasena"
+        Then deberia ver mi nuevo nombre "nuevoNombre" en el campo nombre
+        And deberia ver mi nueva contrasena "nuevaContrasena" en el campo contrasena
 
     Scenario: Ingreso nuevo nombre, contrasena y contrasena de confirmacion
         Given estoy en la pagina editar datos
-        When ingreso mi nuevo nombre
-        And ingreso mi contrasena
-        And confirmo mi contrasena
-        Then deberia ver mi nuevo nombre "nombre" en el campo nombre
-        And deberia ver mi nueva contrasena "contrasena" en el campo contrasena
-        And deberia ver mi nueva contrasena "contrasena" en el campo confirmar contrasena
+        When ingreso mi nuevo nombre "nuevoNombre"
+        And ingreso mi contrasena "nuevaContrasena"
+        And confirmo mi contrasena "nuevaContrasena"
+        Then deberia ver mi nuevo nombre "nuevoNombre" en el campo nombre
+        And deberia ver mi nueva contrasena "nuevaContrasena" en el campo contrasena
+        And deberia ver mi nueva contrasena "nuevaContrasena" en el campo confirmar contrasena
 
     Scenario: Confirmo mis nuevo datos
         Given estoy en la pagina editar datos
-        When ingreso mi nuevo nombre
-        And ingreso mi contrasena
-        And confirmo mi contrasena
+        When ingreso mi nuevo nombre "nuevoNombre"
+        And ingreso mi contrasena "nuevaContrasena"
+        And confirmo mi contrasena "nuevaContrasena"
         And presiono el boton "Confirmar"
-        Then deberia ver mi nuevo nombre "nombre" en el campo nombre
-        And deberia ver mi nueva contrasena "contrasena" en el campo contrasena
-        And deberia ver mi nueva contrasena "contrasena" en el campo confirmar contrasena
+        Then deberia ver mi nuevo nombre "nuevoNombre" en el campo nombre
+        And deberia ver mi nueva contrasena "nuevaContrasena" en el campo contrasena
+        And deberia ver mi nueva contrasena "nuevaContrasena" en el campo confirmar contrasena
         And deberia enviarme a la pagina de elegir modalidad

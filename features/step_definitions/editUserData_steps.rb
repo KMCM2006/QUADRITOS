@@ -3,26 +3,26 @@ Given("visito la pagina editar datos") do
 end
   
 Then("deberia ver el titulo {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_content(string)
 end
   
 Then("deberia ver un campo para ingresar mi nuevo nombre") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_selector('#usuario', visible: false) 
 end
   
 Then("deberia ver un campo para ingresar mi nueva contrasena") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_selector('#contrasenia', visible: false) 
 end
   
 Then("deberia ver un campo para confirmar mi contrasena") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_selector('#contraseniaConfirmar', visible: false) 
 end
   
 Given("estoy en la pagina editar datos") do
     pending # Write code here that turns the phrase above into concrete actions
 end
   
-When("ingreso mi nuevo nombre") do
+When("ingreso mi nuevo nombre {string}") do |string|
     pending # Write code here that turns the phrase above into concrete actions
 end
   
@@ -30,7 +30,7 @@ Then("deberia ver mi nombre en el campo {string}") do |string|
     pending # Write code here that turns the phrase above into concrete actions
 end
   
-When("ingreso mi contrasena") do
+When("ingreso mi contrasena {string}") do |string|
     pending # Write code here that turns the phrase above into concrete actions
 end
   
@@ -42,7 +42,7 @@ Then("deberia ver mi nueva contrasena {string} en el campo contrasena") do |stri
     pending # Write code here that turns the phrase above into concrete actions
 end
   
-When("confirmo mi contrasena") do
+When("confirmo mi contrasena {string}") do |string|
     pending # Write code here that turns the phrase above into concrete actions
 end
   
