@@ -25,9 +25,9 @@ class App < Sinatra::Base
 
     get '/save' do
         @score = Score.new
-        @score.avatar = "avatar"
+        @score.avatar = "avatar1.jpg"
         @score.name = "baymax"
-        @score.points = "100"
+        @score.points = "10"
         @score.save()
     end
 
