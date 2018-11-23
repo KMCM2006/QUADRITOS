@@ -31,15 +31,15 @@ When("ingreso mi nuevo nombre {string}") do |string|
 end
 
 When("ingreso mi contrasena {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    fill_in 'password', with: string
 end
   
 Then("deberia ver mi nuevo nombre {string} en el campo nombre") do |string|
-    fill_in 'user', with: string
+    expect(find_field('user').value).to eq string
 end
   
 Then("deberia ver mi nueva contrasena {string} en el campo contrasena") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(find_field('password').value).to eq string
 end
   
 When("confirmo mi contrasena {string}") do |string|
