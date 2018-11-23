@@ -100,4 +100,8 @@ class App < Sinatra::Base
         @scores = Score.all
         erb :score
     end
+
+    get '/edit' do
+        erb :edit
+    end
 end
