@@ -3,5 +3,5 @@ Then("deberia ver un iframe de youtube") do
 end
   
 Then("deberia comenzar a reproducirse automaticamente") do
-    pending # Write code here that turns the phrase above into concrete actions
+    expect(page).to have_css("iframe[src='https://www.youtube.com/embed/l9PxOanFjxQ?autoplay=1&start=40']")
 end
