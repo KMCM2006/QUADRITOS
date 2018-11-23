@@ -17,10 +17,8 @@ class Board
         @lineId = 0
         for i in (1..@rows) do
             for j in (1..@columns-1) do
-                @lineId = @lineId + 1
-                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i, @lineId))
-                @lineId = @lineId + 1
-                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval), @lineId))
+                @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i))
+                @verticalLines.push(Line.new(@interval*i, @interval*i,(j*@interval), ((j+1)*@interval)))
             end
         end
     end
@@ -32,11 +30,11 @@ class Board
         positions =values[1].split('_')
         udpateLine(orientation, positions)
         if(orientation == 'H')
-            result = result + verifiyHorizontalLineTop(positions).to_s
-            result = result + verifiyHorizontalLineBotton(positions).to_s
+            result = result + "HT-" + verifiyHorizontalLineTop(positions).to_s + "_"
+            result = result + "HB-" + verifiyHorizontalLineBotton(positions).to_s + "_"
         else
-            result = result + verifyVerticalLineRight(positions).to_s
-            result = result + verifyVerticalLineLeft(positions).to_s
+            result = result + "VR-" + verifyVerticalLineRight(positions).to_s + "_"
+            result = result + "VL-" + verifyVerticalLineLeft(positions).to_s + "_"
         end
         return result
     end
@@ -195,6 +193,31 @@ class Board
             end
         end
         return true
+    end
+
+    def getPositionsOfSquare(positions, options)
+        values = positions.split('-')
+        orientation = values[0]
+        positions = values[1]
+        positions = positions.split('_')
+        options = options.split('_')
+        options[0] = options[0].split('-')
+        options[1] = options[1].split('-')
+        if orientation == 'H'
+            if options[0][0] == 'HT' && options[0][1] == 'true'
+                return (positions[3].to_i-50).to_s + "-" + positions[0].to_s
+            end
+            if options[1][0] == 'HB' && options[1][1] == 'true'
+                return positions[2].to_s + "-" + positions[0].to_s
+            end
+        else
+            if options[0][0] == 'VR' && options[0][1] == 'true'
+                return positions[2].to_s + "-" + (positions[0].to_i-50).to_s
+            end
+            if options[1][0] == 'VL' && options[1][1] == 'true'
+                return positions[2].to_s + "-" + positions[0].to_s
+            end
+        end
     end
 
 end

@@ -30,7 +30,7 @@ class App < Sinatra::Base
         @score.points = "100"
         @score.save()
     end
-    
+
     get '/list' do
         @scores = Score.all
         erb :scores
@@ -44,7 +44,7 @@ class App < Sinatra::Base
         @username = params[:user]
         @password = params[:password]
         @confirmPassword = params[:confirmPassword]
-        if(@password != @confirmPassword) 
+        if(@password != @confirmPassword)
             redirect '/register'
         else
             erb :modality
@@ -59,13 +59,20 @@ class App < Sinatra::Base
         $modality = params[:modality]
         if($modality == "1")
             $numberPlayers = params[:numberPlayers]
+            $numberBoardSize = params[:numberBoardSize]
             $player1 = params[:name11]
             $player2 = params[:name12]
             $player3 = params[:name13]
             $player4 = params[:name14]
+            $avatar1 = params[:avatar11]
+            $avatar2 = params[:avatar12]
+            $avatar3 = params[:avatar13]
+            $avatar4 = params[:avatar14]
+            $avatars = $avatar1 + "," + $avatar2 + "," + $avatar3 + "," + $avatar4
             $playersName = $player1 + "," + $player2 + "," + $player3 + "," + $player4
             $numberPlayers = $numberPlayers.to_i
-            $game = Game.new(7, 7, $numberPlayers, $playersName)
+            $numberBoardSize = $numberBoardSize.to_i
+            $game = Game.new($numberBoardSize, $numberBoardSize, $numberPlayers, $playersName, $avatars)
             erb :game
         else
             redirect '/modality'
@@ -80,8 +87,10 @@ class App < Sinatra::Base
             $game.incrementScoreOfPlayer(params[:currentTurn])
             winner = $game.getWinner[0]
             ended = $game.getBoard.endedTheGame
+            position = $game.getBoard.getPositionsOfSquare(params[:positions], response)
+            avatar = $game.getAvatarOfUser(params[:currentTurn])
         end
-        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\"}"
+        return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\", \"position\": \""+ position.to_s + "\", \"avatar\": \""+ avatar.to_s + "\"}"
     end
 
     get '/scores' do
