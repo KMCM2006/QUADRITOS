@@ -38,7 +38,7 @@ Feature: Editar datos de usuario
         When ingreso mi nuevo nombre "nuevoNombre"
         And ingreso mi contrasena "nuevaContrasena"
         And confirmo mi contrasena "nuevaContrasena"
-        And presiono el boton "Confirmar"
+        And confirmo los cambios
         Then deberia ver mi nuevo nombre "nuevoNombre" en el campo nombre
         And deberia ver mi nueva contrasena "nuevaContrasena" en el campo contrasena
         And deberia ver mi nueva contrasena "nuevaContrasena" en el campo confirmar contrasena

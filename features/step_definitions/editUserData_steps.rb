@@ -43,11 +43,15 @@ Then("deberia ver mi nueva contrasena {string} en el campo contrasena") do |stri
 end
   
 When("confirmo mi contrasena {string}") do |string|
-    pending # Write code here that turns the phrase above into concrete actions
+    fill_in 'confirmPassword', with: string
 end
   
-Then("deberia ver mi nueva contrasena {string} en el campo confirmar contrasena") do |string|
+When("confirmo los cambios") do
     pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("deberia ver mi nueva contrasena {string} en el campo confirmar contrasena") do |string|
+    expect(find_field('confirmPassword').value).to eq string
 end
   
 Then("deberia enviarme a la pagina de elegir modalidad") do
