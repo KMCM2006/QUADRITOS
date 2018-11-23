@@ -13,3 +13,7 @@ end
 Then("deberia ver una tabla con el titulo {string}") do |string|
     expect(page).to have_content(string)
 end
+
+Then("se ve la columna {string}") do |string|
+    expect(page).to have_content(string)
+end
