@@ -47,13 +47,13 @@ When("confirmo mi contrasena {string}") do |string|
 end
   
 When("confirmo los cambios") do
-    pending # Write code here that turns the phrase above into concrete actions
+    click_button('Confirmar')
 end
 
 Then("deberia ver mi nueva contrasena {string} en el campo confirmar contrasena") do |string|
     expect(find_field('confirmPassword').value).to eq string
 end
   
-Then("deberia enviarme a la pagina de elegir modalidad") do
-    pending # Write code here that turns the phrase above into concrete actions
+Then("me envia a la pagina de elegir modalidad") do
+    visit('/modality')
 end
