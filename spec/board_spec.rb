@@ -41,10 +41,10 @@ describe 'Pruebas de la clase Board' do
     end
 
     it 'deberia devolver false al armar un cuadrado para el caso vertical derecha' do
+        @board.udpateLine('V',[350, 350, 50, 100])
         @board.udpateLine('H',[300, 350, 50, 50])
-        @board.udpateLine('V',[300, 300, 50, 100])
         @board.udpateLine('H',[300, 350, 100, 100])
-        expect(@board.verifyVerticalLineRight([350, 350, 50, 100])).to eq true
+        expect(@board.verifyVerticalLineRight([350, 350, 50, 100])).to eq false
     end
 
     it 'deberia devolver true al armar un cuadrado para el caso vertical izquierda' do
@@ -53,6 +53,13 @@ describe 'Pruebas de la clase Board' do
         @board.udpateLine('V',[300, 300, 50, 100])
         @board.udpateLine('H',[300, 350, 100, 100])
         expect(@board.verifyVerticalLineLeft([300, 300, 50, 100])).to eq true
+    end
+
+    it 'deberia devolver false al armar un cuadrado para el caso vertical izquierda' do
+        @board.udpateLine('H',[300, 350, 50, 50])
+        @board.udpateLine('V',[300, 300, 50, 100])
+        @board.udpateLine('H',[300, 350, 100, 100])
+        expect(@board.verifyVerticalLineLeft([300, 300, 50, 100])).to eq false
     end
 
     it 'deberia devolver true al armar un cuadrado para el caso horizontal superior' do
