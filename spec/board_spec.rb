@@ -85,6 +85,13 @@ describe 'Pruebas de la clase Board' do
         expect(@board.verifiyHorizontalLineBotton([300, 350, 50, 50])).to eq true
     end
 
+    it 'deberia devolver false al armar un cuadrado para el caso horizontal inferior' do
+        @board.udpateLine('V',[350, 350, 50, 100])
+        @board.udpateLine('H',[300, 350, 50, 50])
+        @board.udpateLine('V',[300, 300, 50, 100])
+        expect(@board.verifiyHorizontalLineBotton([300, 350, 50, 50])).to eq false
+    end
+
     it 'deberia retornar false al preguntar si el juego termino' do
         expect(@board.endedTheGame).to eq false
     end
