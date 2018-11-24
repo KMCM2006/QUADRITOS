@@ -26,19 +26,6 @@ class App < Sinatra::Base
     @password
     @confirmPassword
 
-    get '/save' do
-        @score = Score.new
-        @score.avatar = "avatar1.jpg"
-        @score.name = "baymax"
-        @score.points = "10"
-        @score.save()
-    end
-
-    get '/list' do
-        @scores = Score.all
-        erb :scores
-    end
-
     get '/' do
         erb :welcome
     end
@@ -94,6 +81,14 @@ class App < Sinatra::Base
             avatar = $game.getAvatarOfUser(params[:currentTurn])
         end
         return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\", \"position\": \""+ position.to_s + "\", \"avatar\": \""+ avatar.to_s + "\"}"
+    end
+
+    get '/save-score' do
+        score = Score.new
+        score.name = $game.getWinner[1].getName
+        score.avatar = $game.getWinner[1].getAvatar
+        score.points = $game.getWinner[1].getScore
+        score.save()
     end
 
     get '/scores' do

@@ -14,7 +14,6 @@ class Board
         end
         @horizontalLines = Array[]
         @verticalLines = Array[]
-        @lineId = 0
         for i in (1..@rows) do
             for j in (1..@columns-1) do
                 @horizontalLines.push(Line.new((j*@interval), ((j+1)*@interval), @interval*i, @interval*i))
