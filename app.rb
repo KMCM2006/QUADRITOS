@@ -93,6 +93,14 @@ class App < Sinatra::Base
         return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\", \"position\": \""+ position.to_s + "\", \"avatar\": \""+ avatar.to_s + "\"}"
     end
 
+    get '/save-score' do
+        score = Score.new
+        score.name = $game.getWinner[1].getName
+        score.avatar = $game.getWinner[1].getAvatar
+        score.points = $game.getWinner[1].getScore
+        score.save()
+    end
+
     get '/scores' do
         erb :score
     end

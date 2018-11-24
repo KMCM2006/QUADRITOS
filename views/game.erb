@@ -60,6 +60,9 @@
                     $("#iconm-"+response["winner"]).css("display","block");
                     if(response["ended"].includes('true')) {
                         $('#exampleModal').modal('show');
+                        fetch('/save-score')
+                        .then(() => console.log("success"))
+                        .catch(error => console.error("Error: ", error))
                     }
                 }
             });
