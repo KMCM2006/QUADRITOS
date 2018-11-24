@@ -107,6 +107,14 @@ describe 'Pruebas de la clase Board' do
         expect(@board.verifySquare('V-300_300_50_100')).to eq "VR-false_VL-true_"
     end
 
+    it 'deberia devolver "VR-false_VL-false_" al armar un cuadrado para el caso vertical izquierda' do
+        @board.udpateLine('H',[300, 350, 50, 50])
+        @board.udpateLine('V',[300, 300, 50, 100])
+        @board.udpateLine('H',[300, 350, 100, 100])
+        expect(@board.verifySquare('V-300_300_50_100')).to eq "VR-false_VL-false_"
+    end
+
+
     it 'deberia devolver true al armar un cuadrado para el caso horizontal superior' do
         @board.udpateLine('V',[350, 350, 50, 100])
         @board.udpateLine('H',[300, 350, 50, 50])
