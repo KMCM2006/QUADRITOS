@@ -7,15 +7,15 @@ Then("deberia ver el titulo {string}") do |string|
 end
   
 Then("deberia ver un campo para ingresar mi nuevo nombre") do
-    expect(page).to have_selector('#usuario', visible: false) 
+    expect(page).to have_selector('#user', visible: true) 
 end
   
 Then("deberia ver un campo para ingresar mi nueva contrasena") do
-    expect(page).to have_selector('#contrasenia', visible: false) 
+    expect(page).to have_selector('#password', visible: true) 
 end
   
 Then("deberia ver un campo para confirmar mi contrasena") do
-    expect(page).to have_selector('#contraseniaConfirmar', visible: false) 
+    expect(page).to have_selector('#confirmPassword', visible: true) 
 end
   
 Given("estoy en la pagina editar datos") do
