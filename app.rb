@@ -26,19 +26,6 @@ class App < Sinatra::Base
     @password
     @confirmPassword
 
-    get '/save' do
-        @score = Score.new
-        @score.avatar = "avatar1.jpg"
-        @score.name = "baymax"
-        @score.points = "10"
-        @score.save()
-    end
-
-    get '/list' do
-        @scores = Score.all
-        erb :scores
-    end
-
     get '/' do
         erb :welcome
     end
