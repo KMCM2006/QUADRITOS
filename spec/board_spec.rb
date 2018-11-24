@@ -68,4 +68,15 @@ describe 'Pruebas de la clase Board' do
         expect(@board.endedTheGame).to eq false
     end
 
+    it 'deberia retornar true al preguntar si el juego termino' do
+        @interval = 50
+        for i in (1..7) do
+            for j in (1..6) do
+                @board.udpateLine('H',[(j*@interval), ((j+1)*@interval), @interval*i, @interval*i])
+                @board.udpateLine('V',[@interval*i, @interval*i,(j*@interval), ((j+1)*@interval)])
+            end
+        end
+        expect(@board.endedTheGame).to eq true
+    end
+
 end
