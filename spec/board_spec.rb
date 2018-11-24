@@ -167,6 +167,13 @@ describe 'Pruebas de la clase Board' do
         expect(@board.verifySquare('H-300_350_50_50')).to eq "HT-false_HB-true_"
     end
 
+    it 'deberia devolver "HT-false_HB-false_" al armar un cuadrado para el caso horizontal inferior' do
+        @board.udpateLine('V',[350, 350, 50, 100])
+        @board.udpateLine('H',[300, 350, 50, 50])
+        @board.udpateLine('V',[300, 300, 50, 100])
+        expect(@board.verifySquare('H-300_350_50_50')).to eq "HT-false_HB-false_"
+    end
+
     it 'deberia retornar false al preguntar si el juego no termino' do
         expect(@board.endedTheGame).to eq false
     end
