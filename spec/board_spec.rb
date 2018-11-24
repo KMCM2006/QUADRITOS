@@ -14,6 +14,16 @@ describe 'Pruebas de la clase Board' do
         expect(@board.getColumns()).to eq 7
     end
 
+    it 'deberia crearse el tablero con las lineas invisibles' do
+        @interval = 50
+        for i in (1..7) do
+            for j in (1..6) do
+                expect(@board.isLineVisible('V',[@interval*i, @interval*i,(j*@interval), ((j+1)*@interval)])).to eq false
+                expect(@board.isLineVisible('H',[(j*@interval), ((j+1)*@interval), @interval*i, @interval*i])).to eq false
+            end
+        end
+    end
+
     it "deberia hacerse visible la linea en la orientacion 'V' con las posiciones '350 350 50 100'" do
         @board.udpateLine('V',[350, 350, 50, 100])
         expect(@board.isLineVisible('V',[350, 350, 50, 100])).to eq true
