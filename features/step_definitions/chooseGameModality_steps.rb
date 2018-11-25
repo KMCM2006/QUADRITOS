@@ -7,7 +7,7 @@ end
  # end
 
 Then("se ve la opcion para elegir la cantidad de jugadores") do
-    expect(page).to have_selector('#numberPlayerSelector', visible: false)    
+    expect(page).to have_selector('#numberPlayerSelector', visible: true)    
 end
 
 When("selecciono modalidad {string} Opcion {int}") do |string, int|

@@ -4,6 +4,10 @@ Feature: Iniciar sesion
     Para poder reconocerme
 
     Scenario: Iniciar con mi correo y password
-        Given visito la pagina inicia sesion
-        Then deberia mostrar el logo del juego en la barra de navegacion
-        And deberia ver el boton "iniciar"
+        Given visito la pagina principal
+        When selecciono la opcion de Iniciar Sesion
+        And deberia mostrarme el mensaje "Iniciar Sesion" en la pagina de "Login"
+        And ingrese el nombre "Lupita" en el campo "user"
+        And ingreso la contraseña "123" en el campo "password"
+        And seleccion el boton iniciar
+        Then me muestra el mensaje de modalidades
