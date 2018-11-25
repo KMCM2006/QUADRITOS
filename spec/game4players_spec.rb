@@ -11,10 +11,12 @@ describe "Pruebas de la clase Game" do
     end
 
     it "deberia crearse '4' jugadores" do
+        expect(@game.getPlayers).not_to eq be_empty
         expect(@game.getPlayers.length).to eq 4
     end
 
     it "deberian crearse '4' avatares" do
+        expect(@game.getAvatars).not_to eq be_empty
         expect(@game.getAvatars.length).to eq 4
     end
 
