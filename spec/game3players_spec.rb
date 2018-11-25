@@ -7,14 +7,16 @@ describe "Pruebas de la clase Game" do
     end
 
     it "deberia crearse un tablero" do
-        expect(@game).not_to eq be_empty
+        expect(@game.getBoard).not_to eq be_empty
     end
 
     it "deberia crearse '3' jugadores" do
+        expect(@game.getPlayers).not_to eq be_empty
         expect(@game.getPlayers.length).to eq 3
     end
 
     it "deberian crearse '3' avatares" do
+        expect(@game.getAvatars).not_to eq be_empty
         expect(@game.getAvatars.length).to eq 3
     end
 
