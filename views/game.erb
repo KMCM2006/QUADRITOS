@@ -17,21 +17,19 @@
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
-            verifySquare(line);
-            currentTurn++;
-            if(currentTurn > totalPlayer)
-                currentTurn = 1;
-            evaluateCurrentTurn();
+            verifySquare(line)
         }
 
         function verifySquare(line) {
             let tempTurn;
+            let wasItPoint = false;
             tempTurn = currentTurn
             fetch('/verify-square?positions='+line.id+'&currentTurn='+tempTurn)
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response["response"].includes('true')) {
+                    wasItPoint = true;
                     let position = response['position']
                     position = position.split('-');
                     let image = document.createElementNS('http://www.w3.org/2000/svg','image');
@@ -64,7 +62,13 @@
                         .then(() => console.log("success"))
                         .catch(error => console.error("Error: ", error))
                     }
+                    currentTurn = tempTurn;
                 }
+                if(!wasItPoint)
+                    currentTurn++;
+                if(currentTurn > totalPlayer)
+                    currentTurn = 1;
+                evaluateCurrentTurn();
             });
         }
 
