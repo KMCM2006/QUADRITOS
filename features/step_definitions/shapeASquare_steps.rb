@@ -5,5 +5,4 @@ When("selecciono la linea con orientacion {string} con las posiciones {string}, 
 
   Then("deberia desplegarse el mensaje {string}") do |message|
     expect(page).to have_content(message)
-    #page.should have_css('html body div.container.main-game div.row div.col-sm.scores div')
   end

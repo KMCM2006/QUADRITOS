@@ -17,21 +17,19 @@
             evaluateCurrentTurn();
             $("#"+line.id).css('stroke', rgbValue);
             $("#"+line.id).removeAttr('onclick');
-            verifySquare(line);
-            currentTurn++;
-            if(currentTurn > totalPlayer)
-                currentTurn = 1;
-            evaluateCurrentTurn();
+            verifySquare(line)
         }
 
         function verifySquare(line) {
             let tempTurn;
+            let wasItPoint = false;
             tempTurn = currentTurn
             fetch('/verify-square?positions='+line.id+'&currentTurn='+tempTurn)
             .then(response => response.json())
             .catch(error => console.error('Error:', error))
             .then(response => {
                 if(response["response"].includes('true')) {
+                    wasItPoint = true;
                     let position = response['position']
                     position = position.split('-');
                     let image = document.createElementNS('http://www.w3.org/2000/svg','image');
@@ -60,8 +58,17 @@
                     $("#iconm-"+response["winner"]).css("display","block");
                     if(response["ended"].includes('true')) {
                         $('#exampleModal').modal('show');
+                        fetch('/save-score')
+                        .then(() => console.log("success"))
+                        .catch(error => console.error("Error: ", error))
                     }
+                    currentTurn = tempTurn;
                 }
+                if(!wasItPoint)
+                    currentTurn++;
+                if(currentTurn > totalPlayer)
+                    currentTurn = 1;
+                evaluateCurrentTurn();
             });
         }
 
@@ -125,7 +132,7 @@
                     <a class="nav-link" href="/">Pagina principal</a>
                 </li>
                 <li class="nav-item active">
-                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&name11=<%=$player1%>&avatar11=<%$avatar1%>&name12=<%=$player2%>&avatar12=<%$avatar2%>&name13=<%=$player3%>&avatar13=<%$avatar3%>&name14=<%=$player4%>&avatar14=<%$avatar4%>">Reiniciar Partida</a>
+                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberBoardSize%>&name11=<%=$player1%>&avatar11=<%=$avatar1%>&name12=<%=$player2%>&avatar12=<%=$avatar2%>&name13=<%=$player3%>&avatar13=<%=$avatar3%>&name14=<%=$player4%>&avatar14=<%=$avatar4%>">Reiniciar Partida</a>
                 </li>
                 <li class="nav-item active">
                     <a id="Nueva" class="nav-link" href="/modality">Nueva Partida</a>
@@ -168,12 +175,12 @@
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row">
-                                    <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    <img src="<%= player[1].getAvatar%>" id="avatar-<%= player[0]%>"style="width: 15%; height: 15%;"/>
                                 </td>
                                 <td id="name-<%= player[0]%>">
                                     <%= player[1].getName%>
                                 </td>
-                                <td id="score-<%= player[0]%>">
+                                <td id="score-<%= player[0]%>" id="score-<%= player[0]%>" name="score-<%= player[0]%>">
                                     <%= player[1].getScore%>
                                 </td>
                                 <td  id="icon-<%= player[0]%>" style="display:none;">
@@ -209,7 +216,7 @@
                     <table class="table table-sm">
                         <thead>
                             <tr>
-                                <th scope="col">Avatar<th>
+                                <th scope="col">Avatar</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Puntaje</th>
                                 <th scope="col">Ganador</th>
@@ -236,7 +243,8 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberPlayers%>&name11=<%=$player1%>&avatar11=<%$avatar1%>&name12=<%=$player2%>&avatar12=<%$avatar2%>&name13=<%=$player3%>&avatar13=<%$avatar3%>&name14=<%=$player4%>&avatar14=<%$avatar4%>">Reiniciar Partida</a>
+                    Se guardo el puntaje del ganador
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberBoardSize%>&name11=<%=$player1%>&avatar11=<%=$avatar1%>&name12=<%=$player2%>&avatar12=<%=$avatar2%>&name13=<%=$player3%>&avatar13=<%=$avatar3%>&name14=<%=$player4%>&avatar14=<%=$avatar4%>">Reiniciar Partida</a>
                     <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
                 </div>
             </div>

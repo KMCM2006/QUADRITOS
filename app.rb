@@ -5,6 +5,9 @@ require "sinatra/activerecord"
 configure :development do
     set :database, {:adapter => "sqlite3", database: "quadritos.sqlite3"}
 end
+configure :test do
+    set :database, {:adapter => "sqlite3", database: "quadritos.sqlite3"}
+end
 configure :production do
     set :database, {:adapter => "postgresql", :host => "ec2-75-101-138-26.compute-1.amazonaws.com", :username => "lalqowuabtegfa", :password => "95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478", :database => "postgres://lalqowuabtegfa:95eccb3192f5caf077b1a090b407369cfac04af1bee689f387ab95a0c1494478@ec2-75-101-138-26.compute-1.amazonaws.com:5432/d8g56bj6362n38"}
 end
@@ -22,19 +25,6 @@ class App < Sinatra::Base
     @username
     @password
     @confirmPassword
-
-    get '/save' do
-        @score = Score.new
-        @score.avatar = "avatar"
-        @score.name = "baymax"
-        @score.points = "100"
-        @score.save()
-    end
-
-    get '/list' do
-        @scores = Score.all
-        erb :scores
-    end
 
     get '/' do
         erb :welcome
@@ -128,7 +118,20 @@ class App < Sinatra::Base
         return "{\"response\": \""+ response + "\", \"winner\": \""+ winner.to_s + "\", \"ended\": \""+ ended.to_s + "\", \"position\": \""+ position.to_s + "\", \"avatar\": \""+ avatar.to_s + "\"}"
     end
 
+    get '/save-score' do
+        score = Score.new
+        score.name = $game.getWinner[1].getName
+        score.avatar = $game.getWinner[1].getAvatar
+        score.points = $game.getWinner[1].getScore
+        score.save()
+    end
+
     get '/scores' do
+        @scores = Score.all
         erb :score
+    end
+
+    get '/edit' do
+        erb :edit
     end
 end

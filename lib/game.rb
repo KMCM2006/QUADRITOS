@@ -48,4 +48,21 @@ class Game
         end
     end
 
+    def getNameOfUser(current)
+        current = current.to_i
+        @players.each do |number, player|
+            if number == current
+                return player.getName
+            end
+        end
+    end
+
+    def getScoreOfUser(current)
+        current = current.to_i
+        @players.each do |number, player|
+            if number == current
+                return player.getScore
+            end
+        end
+    end
 end
