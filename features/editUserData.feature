@@ -5,8 +5,7 @@ Feature: Editar datos de usuario
 
     Scenario: Ingresar a editar datos
         Given visito la pagina editar datos
-        Then deberia ver el logo del juego en la barra de navegacion.
-        And deberia ver el titulo "Editar datos"
+        Then deberia ver el titulo "Editar datos"
         And deberia ver un campo para ingresar mi nuevo nombre
         And deberia ver un campo para ingresar mi nueva contrasena
         And deberia ver un campo para confirmar mi contrasena

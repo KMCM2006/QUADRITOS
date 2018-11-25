@@ -34,15 +34,50 @@ class App < Sinatra::Base
         @username = params[:user]
         @password = params[:password]
         @confirmPassword = params[:confirmPassword]
-        if(@password != @confirmPassword)
-            redirect '/register'
+        if($currentUser == nil)
+            erb :modality
         else
+            @username = $currentUser.name
             erb :modality
         end
     end
 
     get '/register' do
         erb :register
+    end
+
+    get '/save-user' do
+        $name = params[:user]
+        $password = params[:password]
+        $confirmPassword = params[:confirmPassword]
+        if $password == $confirmPassword 
+            $currentUser = User.new
+            $currentUser.name = $name
+            $currentUser.password = $password
+            $currentUser.save()
+            redirect '/modality'
+        else
+            redirect '/register'
+        end
+    end
+
+    get '/find-user' do
+        $name = params[:user]
+        $password = params[:password]
+        $currentUser = User.find_by(name: $name)
+        if $currentUser != nil
+            if $currentUser.password == $password
+                redirect '/modality'
+            else
+                redirect '/logIn'
+            end
+        else
+            redirect '/register'
+        end
+    end
+
+    get '/logIn' do
+        erb :logIn
     end
 
     get '/game' do
