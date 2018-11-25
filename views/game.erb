@@ -175,12 +175,12 @@
                         <% $game.getPlayers.each do |player| %>
                             <tr id="user-<%= player[0]%>">
                                 <td scope="row">
-                                    <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    <img src="<%= player[1].getAvatar%>" id="avatar-<%= player[0]%>"style="width: 15%; height: 15%;"/>
                                 </td>
                                 <td id="name-<%= player[0]%>">
                                     <%= player[1].getName%>
                                 </td>
-                                <td id="score-<%= player[0]%>">
+                                <td id="score-<%= player[0]%>" id="score-<%= player[0]%>" name="score-<%= player[0]%>">
                                     <%= player[1].getScore%>
                                 </td>
                                 <td  id="icon-<%= player[0]%>" style="display:none;">
