@@ -134,4 +134,9 @@ class App < Sinatra::Base
     get '/edit' do
         erb :edit
     end
+
+    get '/log-out' do
+        $currentUser = nil
+        redirect '/'
+    end
 end
