@@ -1,7 +1,7 @@
 Given("visito la pagina editar datos") do
     visit('/edit')
 end
-  
+
 Then("deberia ver el titulo {string}") do |string|
     expect(page).to have_content(string)
 end

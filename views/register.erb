@@ -24,9 +24,9 @@
     </nav>
     <body>
     <center>
-        <b><h1>Registrarse</h1></b>
+        <b><h1 id="register">Registrarse</h1></b>
         <div>
-        <form id="form-register" action="/modality" method="get">
+        <form id="form-register" action="/save-user" method="get">
             <strong><p><label >Usuario:</label></p></strong>
             <input name="user" type="text" id="user" placeholder="Ingrese su usuario" autofocus="" required></p>
             <br/>
@@ -36,7 +36,7 @@
             <strong><p><label>Confirmar contraseña:</label></p></strong>
             <input name="confirmPassword" type="password" id="confirmPassword" placeholder="Ingrese su contraseña" required></p>
              <br/>
-            <input type="submit" class="btn btn-info" name="boton" value="Continuar"/>
+            <input type="submit" class="btn btn-info" value="Continuar"/>
         </form>
         </div>
     </center>
