@@ -1,0 +1,11 @@
+.main-game {
+    padding-top: 1%;
+    text-align: center;
+}
+
+.scores {
+    padding-top: 5%;
+}
+nav a:hover, nav a:active {
+	background-color: #8c99a4;
+}

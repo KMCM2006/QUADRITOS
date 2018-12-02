@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8' />
+    <title>QUADRITOS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style_game.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script>
+        let totalPlayer = <%=$game.getPlayers.length%>;
+        let currentTurn = 1;
+        let rgbValue = '#dee2e6';
+        function selected(line) {
+            evaluateCurrentTurn();
+            $("#"+line.id).css('stroke', rgbValue);
+            $("#"+line.id).removeAttr('onclick');
+            verifySquare(line)
+        }
+
+        function verifySquare(line) {
+            let tempTurn;
+            let wasItPoint = false;
+            tempTurn = currentTurn
+            fetch('/verify-square?positions='+line.id+'&currentTurn='+tempTurn)
+            .then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => {
+                if(response["response"].includes('true')) {
+                    wasItPoint = true;
+                    let position = response['position']
+                    position = position.split('-');
+                    let image = document.createElementNS('http://www.w3.org/2000/svg','image');
+                    image.setAttributeNS(null, 'height', '50');
+                    image.setAttributeNS(null, 'width', '50');
+                    image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', response['avatar']);
+                    image.setAttributeNS(null, 'y', position[0]+"");
+                    image.setAttributeNS(null, 'x', position[1]+"");
+                    image.setAttributeNS(null, 'visibility', 'visible');
+                    let board = document.getElementById('board');
+                    board.append(image);
+                    let score;
+                    score = Number($("#score-"+tempTurn).text());
+                    score++;
+                    $("#score-"+tempTurn).text(score+"");
+                    $("#scorem-"+tempTurn).text(score+"");
+                    $('#alertMessage').css("visibility","visible");
+                    setTimeout(function(){
+                        $('#alertMessage').css("visibility","hidden");
+                    }, 2000);
+                    for(let i = 1; i <= totalPlayer; i++) {
+                        $("#icon-"+i).css("display","none");
+                        $("#iconm-"+i).css("display","none");
+                    }
+                    $("#icon-"+response["winner"]).css("display","block");
+                    $("#iconm-"+response["winner"]).css("display","block");
+                    if(response["ended"].includes('true')) {
+                        $('#exampleModal').modal('show');
+                        fetch('/save-score')
+                        .then(() => console.log("success"))
+                        .catch(error => console.error("Error: ", error))
+                    }
+                    currentTurn = tempTurn;
+                }
+                if(!wasItPoint)
+                    currentTurn++;
+                if(currentTurn > totalPlayer)
+                    currentTurn = 1;
+                evaluateCurrentTurn();
+            });
+        }
+
+        function evaluateCurrentTurn() {
+            let classRow;
+            for(let i = 1; i <= totalPlayer; i++) {
+                $("#user-"+i).removeAttr('class');
+                $("#user-"+i).attr('class', '');
+                $('#user-'+i)[0].className = '';
+            }
+            switch(currentTurn) {
+                case 1:
+                    classRow = 'bg-primary';
+                    rgbValue = '#007bff';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 2:
+                    classRow = 'bg-success';
+                    rgbValue = '#28a745';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 3:
+                    classRow = 'bg-danger';
+                    rgbValue = '#dc3545';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                case 4:
+                    classRow = 'bg-warning';
+                    rgbValue = '#ffc107';
+                    $("#user-"+currentTurn).addClass(classRow);
+                    break;
+                default:
+                    currentTurn = 0;
+            }
+        }
+
+        function start () {
+            classRow = 'bg-primary';
+            $("#user-1").addClass('bg-primary');
+        }
+
+        function showGameRulesModal(){
+            $('#showGameRulesModal').modal('show');
+        }
+
+        window.onload=start;
+    </script>
+
+</head>
+
+<body style="background:rgb(107,213,225)">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+        <div class="navbar-brand"><img src="logo.jpg" height="42" width="42"/></div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Pagina principal</a>
+                </li>
+                <li class="nav-item active">
+                    <a id="Reiniciar" class="nav-link" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberBoardSize%>&name11=<%=$player1%>&avatar11=<%=$avatar1%>&name12=<%=$player2%>&avatar12=<%=$avatar2%>&name13=<%=$player3%>&avatar13=<%=$avatar3%>&name14=<%=$player4%>&avatar14=<%=$avatar4%>">Reiniciar Partida</a>
+                </li>
+                <li class="nav-item active">
+                    <a id="Nueva" class="nav-link" href="/modality">Nueva Partida</a>
+                </li>
+                <li class="nav-item active" >
+                    <a class="nav-link" href="#" id="gameRulesLink" onclick="showGameRulesModal()">Ver reglas</a>
+                </li>
+                <li class="nav-item active">
+                    <a id="Cerrar Sesion" class="nav-link" href="/log-out">Cerrar Sesion</a>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-link disabled">Bienvenido <%=@username%></div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container main-game">
+        <div class="row">
+            <div class="col-sm">
+                <svg viewbox="0 0 500 500" width="100%" height="100%" preserveAspectRatio="xMinYMin meet" id="board">
+                    <% $game.getBoard.getHorizontalLines.each do |line| %>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="H-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                    <% end %>
+                    <% $game.getBoard.getVerticalLines.each do |line| %>
+                        <line x1="<%=line.getPosX1%>" x2="<%=line.getPosX2%>" y1="<%=line.getPosY1%>" y2="<%=line.getPosY2%>" onclick="selected(this)" id="V-<%=line.getPositions%>" style="stroke:rgb(107,213,225);stroke-width:9"/>
+                    <% end %>
+                    <% $game.getBoard.getPoints.each do |point| %>
+                        <circle cx="<%=point.getPosX%>" cy="<%=point.getPosY%>" r="<%=point.getRadio%>"/>
+                    <% end %>
+                </svg>
+            </div>
+            <div class="col-sm scores">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Puntaje</th>
+                            <th scope="col">Ganando</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% $game.getPlayers.each do |player| %>
+                            <tr id="user-<%= player[0]%>">
+                                <td scope="row">
+                                    <img src="<%= player[1].getAvatar%>" id="avatar-<%= player[0]%>"style="width: 15%; height: 15%;"/>
+                                </td>
+                                <td id="name-<%= player[0]%>">
+                                    <%= player[1].getName%>
+                                </td>
+                                <td id="score-<%= player[0]%>" id="score-<%= player[0]%>" name="score-<%= player[0]%>">
+                                    <%= player[1].getScore%>
+                                </td>
+                                <td  id="icon-<%= player[0]%>" style="display:none;">
+                                    <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <div>
+                    <iframe width="300" height="200" id="iframeYoutubeSound"
+                        src="https://www.youtube.com/embed/l9PxOanFjxQ?autoplay=1&start=40" allow="autoplay">
+                    </iframe>
+                </div>
+                <div>
+                    <div class="alert alert-success" role="alert" id="alertMessage" style="visibility: hidden;">
+                        Enhorabuena
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Juego terminado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Avatar</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Puntaje</th>
+                                <th scope="col">Ganador</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% $game.getPlayers.each do |player| %>
+                                <tr>
+                                    <td>
+                                        <img src="<%= player[1].getAvatar%>" style="width: 15%; height: 15%;"/>
+                                    </td>
+                                    <td>
+                                        <%= player[1].getName%>
+                                    </td>
+                                    <td id="scorem-<%= player[0]%>">
+                                        <%= player[1].getScore%>
+                                    </td>
+                                    <td  id="iconm-<%= player[0]%>" style="display:none;">
+                                        <object data="/icon.svg" type="image/svg+xml" style="width: 15%; height: 15%;"><object>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    Se guardo el puntaje del ganador
+                    <a type="button" class="btn btn-secondary" href="/game?modality=1&numberPlayers=<%=$numberPlayers%>&numberBoardSize=<%=$numberBoardSize%>&name11=<%=$player1%>&avatar11=<%=$avatar1%>&name12=<%=$player2%>&avatar12=<%=$avatar2%>&name13=<%=$player3%>&avatar13=<%=$avatar3%>&name14=<%=$player4%>&avatar14=<%=$avatar4%>">Reiniciar Partida</a>
+                    <a type="button" class="btn btn-primary" href="/modality">Nueva Partida</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="showGameRulesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="showGameRulesModalLabel">Reglas del juego</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>1. En cada jugada, de forma alternada, 
+                    un jugador unirá dos puntos consecutivos horizontal o verticalmente.</p>
+                    <p>2. Las líneas diagonales no son permitidas en el juego.</p>
+                    <p>3. Cuando un jugador forma con estas líneas un cuadrado, gana un punto.</p>
+                    <p>4. Cuando un jugador forma con estas líneas un cuadrado se lo marca 
+                    con un color distintivo</p>
+                    <p>5. Después de formar un cuadrado deberá dibujar una línea más, cerrando todos los 
+                    cuadros que el tablero permita.</p>
+                    <p>6. El jugador que se haga con más cuadrados gana la partida.</p>
+                    <br/>
+                    <div style="text-align: center"><img src="Reglas.jpg"/></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
